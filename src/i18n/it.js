@@ -69,6 +69,7 @@ export default {
 
   histoire: {
     eyebrow: "La nostra storia",
+    badge: "di maestria",
     titre: "L'artigiano dietro l'acqua",
     p1: "Dal 2004, Laurent Vasseur modella le piscine come si scolpisce un paesaggio. Ciò che è iniziato come un sapere familiare è diventato un riferimento del lusso sulla Costa Azzurra.",
     p2: "Ogni piscina è frutto di un'unica esigenza: materiali nobili, linee precise, acqua perfetta. Non costruiamo piscine — creiamo luoghi da vivere.",

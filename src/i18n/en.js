@@ -69,6 +69,7 @@ export default {
 
   histoire: {
     eyebrow: "Our story",
+    badge: "of craftsmanship",
     titre: "The craftsman behind the water",
     p1: "Since 2004, Laurent Vasseur has shaped pools the way one sculpts a landscape. What began as family expertise has become a benchmark of luxury on the French Riviera.",
     p2: "Every pool is the fruit of a single standard: noble materials, precise lines, perfect water. We do not build pools — we create places to live.",

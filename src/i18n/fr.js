@@ -70,6 +70,7 @@ export default {
 
   histoire: {
     eyebrow: "Notre histoire",
+    badge: "de savoir-faire",
     titre: "L'artisan derrière l'eau",
     p1: "Depuis 2004, Laurent Vasseur façonne des piscines comme on sculpte un paysage. Ce qui a commencé par un savoir-faire familial est devenu une référence du haut de gamme sur la Côte d'Azur.",
     p2: "Chaque bassin est le fruit d'une exigence : des matériaux nobles, des lignes justes, une eau parfaite. Nous ne construisons pas des piscines — nous créons des lieux de vie.",
