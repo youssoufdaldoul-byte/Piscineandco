@@ -1,0 +1,202 @@
+.realisations {
+  background: var(--c-fond);
+  overflow: hidden;
+}
+
+/* En-tête */
+.rea__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+.rea__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin-top: 1rem;
+  max-width: 12ch;
+}
+.rea__intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  max-width: 34ch;
+  padding-bottom: 0.5rem;
+}
+
+/* Masonry via colonnes CSS */
+.rea__grid {
+  columns: 3;
+  column-gap: clamp(0.8rem, 1.6vw, 1.4rem);
+}
+.rea__item {
+  break-inside: avoid;
+  margin-bottom: clamp(0.8rem, 1.6vw, 1.4rem);
+}
+
+/* Carte */
+.rea-card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.rea-card__media {
+  position: relative;
+  overflow: hidden;
+}
+.rea-card__media .media-img {
+  border-radius: 0;
+  transition: transform 0.9s var(--ease-water);
+}
+.rea-card:hover .media-img {
+  transform: scale(1.07);
+}
+
+/* Icône lecture pour les vidéos */
+.rea-card__play {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(11, 20, 32, 0.55);
+  backdrop-filter: blur(4px);
+  color: var(--c-texte);
+  border: 1px solid var(--c-ligne);
+}
+
+/* Overlay au hover */
+.rea-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: linear-gradient(to top, rgba(11, 20, 32, 0.9) 0%, rgba(11, 20, 32, 0.15) 45%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-soft);
+}
+.rea-card:hover .rea-card__overlay {
+  opacity: 1;
+}
+
+.rea-card__info {
+  transform: translateY(12px);
+  transition: transform 0.6s var(--ease-water);
+}
+.rea-card:hover .rea-card__info {
+  transform: translateY(0);
+}
+.rea-card__cat {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-or);
+}
+.rea-card__lieu {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  color: var(--c-texte);
+  margin-top: 0.3rem;
+}
+.rea-card__arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: var(--c-fond);
+  transform: translateY(12px) scale(0.9);
+  opacity: 0;
+  transition: all 0.6s var(--ease-water);
+}
+.rea-card:hover .rea-card__arrow {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Sur écrans tactiles : infos toujours visibles (pas de hover) */
+@media (hover: none) {
+  .rea-card__overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(11, 20, 32, 0.85) 0%, transparent 55%);
+  }
+  .rea-card__info {
+    transform: none;
+  }
+  .rea-card__arrow {
+    display: none;
+  }
+}
+
+/* Pied de galerie */
+.rea__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--c-ligne);
+}
+.rea__count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+.rea__count strong {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--c-accent);
+}
+.rea__count span {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+}
+.rea__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-accent);
+  color: var(--c-texte);
+  font-size: 0.92rem;
+  transition: all 0.4s var(--ease-soft);
+}
+.rea__cta:hover {
+  background: var(--c-accent);
+  color: var(--c-fond);
+}
+
+/* Responsive colonnes */
+@media (max-width: 900px) {
+  .rea__grid {
+    columns: 2;
+  }
+}
+@media (max-width: 560px) {
+  .rea__grid {
+    columns: 1;
+  }
+  .rea__head {
+    align-items: flex-start;
+  }
+}

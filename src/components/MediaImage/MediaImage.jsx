@@ -39,6 +39,7 @@ export default function MediaImage({
   ratio = "paysage",
   className = "",
   eager = false,
+  showLabel = true,
 }) {
   const [errored, setErrored] = useState(!src);
 
@@ -67,10 +68,12 @@ export default function MediaImage({
         >
           <span className="media-img__shine" aria-hidden="true" />
           <span className="media-img__wave" aria-hidden="true" />
-          <span className="media-img__label">
-            {label}
-            {sub && <em>{sub}</em>}
-          </span>
+          {showLabel && (label || sub) && (
+            <span className="media-img__label">
+              {label}
+              {sub && <em>{sub}</em>}
+            </span>
+          )}
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { useSmoothScroll } from "./hooks/useSmoothScroll.js";
 import Hero from "./sections/Hero/Hero.jsx";
 import Experience from "./sections/Experience/Experience.jsx";
+import Realisations from "./sections/Realisations/Realisations.jsx";
 
 export default function App() {
   useSmoothScroll();
@@ -9,8 +10,9 @@ export default function App() {
     <main>
       <Hero />
       <Experience />
+      <Realisations />
 
-      {/* Sections à venir : Réalisations → Histoire → Avis → Processus → Devis → Footer */}
+      {/* Sections à venir : Histoire → Avis → Processus → Devis → Footer */}
     </main>
   );
 }
