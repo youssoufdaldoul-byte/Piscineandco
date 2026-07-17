@@ -1,0 +1,140 @@
+.proc {
+  background: var(--c-fond);
+  overflow: hidden;
+}
+
+.proc__head {
+  max-width: 720px;
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+.proc__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin: 1rem 0 1.3rem;
+}
+.proc__intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  max-width: 44ch;
+}
+
+.proc__timeline {
+  position: relative;
+}
+
+/* Steps */
+.proc__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+  z-index: 2;
+}
+.proc-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.proc-step__dot {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-fond-clair);
+  border: 1px solid var(--c-accent);
+  box-shadow: 0 0 0 6px var(--c-fond), 0 10px 30px -10px rgba(47, 182, 196, 0.6);
+  margin-bottom: 1.5rem;
+}
+.proc-step__icon {
+  width: 26px;
+  height: 26px;
+  color: var(--c-accent);
+  display: block;
+}
+.proc-step__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.proc-step__num {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--c-or);
+  margin-bottom: 0.5rem;
+}
+.proc-step__title {
+  font-size: var(--fs-h3);
+  color: var(--c-texte);
+  margin-bottom: 0.7rem;
+}
+.proc-step__text {
+  font-size: 0.98rem;
+  color: var(--c-texte-doux);
+  max-width: 30ch;
+}
+
+/* Ligne de progression (horizontale desktop) */
+.proc__line {
+  position: absolute;
+  top: 28px; /* centre des pastilles (58/2 - 1) */
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--c-ligne);
+  z-index: 1;
+  transform: translateX(12.5%); /* démarre au centre de la 1re colonne */
+  width: 75%; /* jusqu'au centre de la dernière colonne */
+}
+.proc__line-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, var(--c-accent), var(--c-or));
+  transform-origin: left center;
+}
+
+/* ---- Responsive : timeline verticale ---- */
+@media (max-width: 760px) {
+  .proc__steps {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-left: 2.2rem;
+  }
+  .proc-step {
+    position: relative;
+  }
+  .proc-step__dot {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    position: absolute;
+    left: -2.2rem;
+    transform: translateX(-50%);
+  }
+  .proc-step__icon {
+    width: 22px;
+    height: 22px;
+  }
+  .proc-step__num {
+    margin-top: 0.2rem;
+  }
+
+  .proc__line {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 2px;
+    height: auto;
+    transform: none;
+  }
+  .proc__line-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--c-accent), var(--c-or));
+    transform-origin: top center;
+  }
+}

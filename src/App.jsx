@@ -4,6 +4,7 @@ import Experience from "./sections/Experience/Experience.jsx";
 import Realisations from "./sections/Realisations/Realisations.jsx";
 import Histoire from "./sections/Histoire/Histoire.jsx";
 import Avis from "./sections/Avis/Avis.jsx";
+import Processus from "./sections/Processus/Processus.jsx";
 
 export default function App() {
   useSmoothScroll();
@@ -15,8 +16,9 @@ export default function App() {
       <Realisations />
       <Histoire />
       <Avis />
+      <Processus />
 
-      {/* Sections à venir : Processus → Devis → Footer */}
+      {/* Sections à venir : Devis → Footer */}
     </main>
   );
 }
