@@ -1,0 +1,104 @@
+.xp {
+  background:
+    linear-gradient(to bottom, var(--c-fond) 0%, var(--c-fond-clair) 50%, var(--c-fond) 100%);
+  overflow: hidden;
+}
+
+/* En-tête de section */
+.xp__head {
+  max-width: 760px;
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+.xp__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin: 1.2rem 0 1.4rem;
+}
+.xp__intro {
+  font-size: var(--fs-h3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--c-texte-doux);
+  max-width: 640px;
+}
+
+/* Lignes de service */
+.xp__rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 10vw, 9rem);
+}
+
+.xp-row {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.xp-row--reverse .xp-row__media {
+  order: 2;
+}
+.xp-row--reverse .xp-row__text {
+  order: 1;
+}
+
+/* Média + parallax (le wrapper déborde pour laisser respirer le mouvement) */
+.xp-row__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+.xp-row__media [data-parallax] {
+  will-change: transform;
+}
+.xp-row__media [data-parallax] .media-img {
+  transform: scale(1.08); /* compense le déplacement parallax, pas de vide */
+  border-radius: 0;
+}
+
+/* Texte */
+.xp-row__num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  color: var(--c-accent-2);
+  opacity: 0.55;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.xp-row__heading {
+  font-size: var(--fs-h2);
+  color: var(--c-texte);
+  margin-bottom: 1rem;
+}
+.xp-row__desc {
+  font-size: var(--fs-body);
+  color: var(--c-texte-doux);
+  max-width: 46ch;
+}
+.xp-row__rule span {
+  display: block;
+  width: 64px;
+  height: 2px;
+  margin-top: 1.8rem;
+  background: linear-gradient(to right, var(--c-or), transparent);
+}
+
+/* --- Responsive --- */
+@media (max-width: 860px) {
+  .xp-row {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  /* L'image toujours au-dessus du texte, même en ligne "reverse" */
+  .xp-row--reverse .xp-row__media {
+    order: 0;
+  }
+  .xp-row--reverse .xp-row__text {
+    order: 1;
+  }
+  .xp-row__media [data-parallax] .media-img {
+    transform: scale(1.08);
+  }
+}
