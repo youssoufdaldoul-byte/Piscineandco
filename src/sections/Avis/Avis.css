@@ -1,0 +1,167 @@
+.avis {
+  background:
+    linear-gradient(to bottom, var(--c-fond), var(--c-fond-clair) 50%, var(--c-fond));
+  overflow: hidden;
+}
+
+/* En-tête */
+.avis__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.avis__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin: 1rem 0 1rem;
+}
+.avis__intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  max-width: 40ch;
+}
+
+/* Bloc note globale */
+.avis__rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1.4rem 1.8rem;
+  border: 1px solid var(--c-ligne);
+  border-radius: var(--radius);
+  background: var(--c-verre);
+  flex-shrink: 0;
+}
+.avis__rating strong {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--c-or);
+  line-height: 1;
+}
+.avis__rating span {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-texte-doux);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  color: var(--c-or);
+}
+
+/* Carrousel */
+.avis__carousel {
+  position: relative;
+}
+.avis__track {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0.5rem clamp(1.25rem, 5vw, 6rem) 1rem;
+}
+.avis__track::-webkit-scrollbar {
+  display: none;
+}
+
+.avis-card {
+  scroll-snap-align: start;
+  flex: 0 0 clamp(300px, 42vw, 460px);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, var(--c-fond-clair), var(--c-fond));
+  border: 1px solid var(--c-ligne);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+.avis-card__quote {
+  position: absolute;
+  top: 0.4rem;
+  right: 1.4rem;
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--c-accent-2);
+  opacity: 0.35;
+}
+.avis-card .stars {
+  margin-bottom: 1.2rem;
+}
+.avis-card__text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  line-height: 1.5;
+  color: var(--c-texte);
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.avis-card__author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.avis-card__thumb {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--c-ligne);
+}
+.avis-card__thumb .media-img {
+  border-radius: 0;
+  height: 100%;
+}
+.avis-card__name {
+  display: block;
+  color: var(--c-texte);
+  font-weight: 500;
+}
+.avis-card__loc {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-or);
+  margin-top: 0.15rem;
+}
+
+/* Contrôles */
+.avis__controls {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.avis__btn {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--c-ligne);
+  color: var(--c-texte);
+  transition: all 0.35s var(--ease-soft);
+}
+.avis__btn:hover {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-fond);
+}
+
+@media (max-width: 560px) {
+  .avis-card {
+    flex-basis: 82vw;
+  }
+}
