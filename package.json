@@ -1,0 +1,24 @@
+{
+  "name": "azur-piscines",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Site vitrine cinématique pour pisciniste haut de gamme sur la Côte d'Azur",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.13",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "vite": "^5.4.8"
+  }
+}
