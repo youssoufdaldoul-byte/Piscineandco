@@ -1,0 +1,192 @@
+/* ============================================================================
+   HERO CINÉMATIQUE
+   .hero définit la distance de scroll ; .hero__stage est épinglé (pin).
+   ============================================================================ */
+
+.hero {
+  position: relative;
+  height: 250vh; /* distance de scroll pour le push-in */
+  background: var(--c-fond);
+}
+
+.hero__stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* --- Fond --- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transform-origin: 50% 60%;
+}
+
+.water-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.water-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-water);
+}
+.hero__video.is-visible {
+  opacity: 1;
+}
+
+/* Voile permanent pour la lisibilité du texte */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(11, 20, 32, 0.85) 0%, rgba(11, 20, 32, 0.1) 40%, rgba(11, 20, 32, 0.35) 100%),
+    radial-gradient(120% 80% at 50% 30%, transparent 40%, rgba(11, 20, 32, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* Voile de transition vers la section suivante (apparaît au scroll) */
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--c-fond) 96%);
+  pointer-events: none;
+}
+
+/* --- Contenu --- */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--pad-x);
+  will-change: transform, opacity;
+}
+
+.hero__inner {
+  max-width: 900px;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--c-or);
+  margin-bottom: 1.4rem;
+  padding-left: 0.45em; /* compense le letter-spacing */
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-hero);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  color: var(--c-texte);
+  text-shadow: 0 10px 60px rgba(0, 0, 0, 0.45);
+  margin-bottom: 1.5rem;
+}
+
+.hero__subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: rgba(242, 246, 247, 0.86);
+  max-width: 620px;
+  margin: 0 auto 2.6rem;
+}
+
+/* CTA */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: var(--c-accent);
+  color: var(--c-fond);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 40px -12px rgba(47, 182, 196, 0.7);
+  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft), background 0.4s;
+}
+.hero__cta svg {
+  transition: transform 0.4s var(--ease-soft);
+}
+.hero__cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px -12px rgba(47, 182, 196, 0.85);
+}
+.hero__cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* Indicateur de scroll */
+.hero__scroll {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+.hero__scroll-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--c-accent), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--c-texte);
+  animation: heroScroll 2.2s var(--ease-water) infinite;
+}
+@keyframes heroScroll {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(300%); }
+}
+
+@media (max-width: 640px) {
+  .hero__subtitle {
+    margin-bottom: 2rem;
+  }
+  .hero__scroll-line {
+    height: 40px;
+  }
+}
