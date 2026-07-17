@@ -1,0 +1,41 @@
+.lang {
+  display: inline-flex;
+  align-items: center;
+}
+.lang__item {
+  display: inline-flex;
+  align-items: center;
+}
+.lang__sep {
+  color: var(--c-texte-faible);
+  margin: 0 0.15rem;
+  font-size: 0.8rem;
+}
+.lang__btn {
+  color: var(--c-texte-doux);
+  letter-spacing: 0.08em;
+  transition: color 0.3s;
+  padding: 0.2rem 0.35rem;
+}
+.lang__btn:hover {
+  color: var(--c-texte);
+}
+.lang__btn.is-active {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+/* Variante barre (compacte) */
+.lang--bar .lang__btn {
+  font-size: 0.82rem;
+}
+
+/* Variante menu (grande) */
+.lang--menu .lang__btn {
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+}
+.lang--menu .lang__sep {
+  font-size: 1rem;
+  margin: 0 0.4rem;
+}
