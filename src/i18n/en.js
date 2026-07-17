@@ -117,6 +117,7 @@ export default {
 
   devis: {
     eyebrow: "Request a quote",
+    badge: "guaranteed reply",
     titre: "Receive your tailored quote within 48 hours",
     intro: "Tell us about your project. An advisor will reply quickly, with no obligation.",
     champs: {

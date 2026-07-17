@@ -118,6 +118,7 @@ export default {
 
   devis: {
     eyebrow: "Demande de devis",
+    badge: "réponse garantie",
     titre: "Recevez votre devis personnalisé sous 48h",
     intro:
       "Parlez-nous de votre projet. Un conseiller vous répond rapidement, sans engagement.",

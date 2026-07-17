@@ -117,6 +117,7 @@ export default {
 
   devis: {
     eyebrow: "Richiesta di preventivo",
+    badge: "risposta garantita",
     titre: "Ricevete il vostro preventivo personalizzato entro 48 ore",
     intro: "Parlateci del vostro progetto. Un consulente vi risponde rapidamente, senza impegno.",
     champs: {
