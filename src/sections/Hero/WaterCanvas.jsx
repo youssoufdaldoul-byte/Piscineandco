@@ -1,5 +1,15 @@
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import {
+  Scene,
+  OrthographicCamera,
+  WebGLRenderer,
+  ShaderMaterial,
+  Color,
+  Vector2,
+  Mesh,
+  PlaneGeometry,
+  Clock,
+} from "three";
 
 /**
  * Surface d'eau procédurale (Three.js) — élément 3D subtil du hero.
@@ -18,24 +28,24 @@ export default function WaterCanvas() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const scene = new Scene();
+    const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: false, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
     const uniforms = {
       uTime: { value: 0 },
-      uRes: { value: new THREE.Vector2(mount.clientWidth, mount.clientHeight) },
-      uColorDeep: { value: new THREE.Color("#0B1420") },
-      uColorLagoon: { value: new THREE.Color("#1A7A9E") },
-      uColorTurquoise: { value: new THREE.Color("#2FB6C4") },
-      uColorGold: { value: new THREE.Color("#C9A86A") },
+      uRes: { value: new Vector2(mount.clientWidth, mount.clientHeight) },
+      uColorDeep: { value: new Color("#0B1420") },
+      uColorLagoon: { value: new Color("#1A7A9E") },
+      uColorTurquoise: { value: new Color("#2FB6C4") },
+      uColorGold: { value: new Color("#C9A86A") },
     };
 
-    const material = new THREE.ShaderMaterial({
+    const material = new ShaderMaterial({
       uniforms,
       transparent: true,
       vertexShader: /* glsl */ `
@@ -128,12 +138,12 @@ export default function WaterCanvas() {
       `,
     });
 
-    const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+    const quad = new Mesh(new PlaneGeometry(2, 2), material);
     scene.add(quad);
 
     let frameId;
     let running = true;
-    const clock = new THREE.Clock();
+    const clock = new Clock();
 
     const render = () => {
       if (running) {

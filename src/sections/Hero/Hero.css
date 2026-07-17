@@ -23,6 +23,9 @@
   inset: 0;
   will-change: transform;
   transform-origin: 50% 60%;
+  /* Repli aquatique instantané avant le chargement de la surface d'eau 3D */
+  background:
+    linear-gradient(to bottom, #0b1420 0%, #123243 42%, #1a7a9e 58%, #123243 75%, #0b1420 100%);
 }
 
 .water-canvas {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { resolveMedia } from "../../config/mediaRemote.js";
 import "./MediaImage.css";
 
 /**
@@ -41,7 +42,8 @@ export default function MediaImage({
   eager = false,
   showLabel = true,
 }) {
-  const [errored, setErrored] = useState(!src);
+  const resolvedSrc = resolveMedia(src);
+  const [errored, setErrored] = useState(!resolvedSrc);
 
   return (
     <div
@@ -50,7 +52,7 @@ export default function MediaImage({
     >
       {!errored && (
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           loading={eager ? "eager" : "lazy"}
           decoding="async"

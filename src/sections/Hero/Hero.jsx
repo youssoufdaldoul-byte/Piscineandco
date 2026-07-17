@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { gsap, ScrollTrigger } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
-import WaterCanvas from "./WaterCanvas.jsx";
+import { resolveMedia } from "../../config/mediaRemote.js";
 import "./Hero.css";
+
+// Surface d'eau 3D chargée à part (sort Three.js du bundle initial)
+const WaterCanvas = lazy(() => import("./WaterCanvas.jsx"));
 
 export default function Hero() {
   const { t } = useLangue();
@@ -59,14 +62,16 @@ export default function Hero() {
       <div className="hero__stage" ref={stageRef}>
         {/* Fond : surface d'eau 3D (placeholder + effet permanent) */}
         <div className="hero__bg" ref={bgRef}>
-          <WaterCanvas />
+          <Suspense fallback={null}>
+            <WaterCanvas />
+          </Suspense>
 
           {/* Vidéo cinématique par-dessus (visible seulement si le média existe) */}
           <video
             ref={videoRef}
             className={`hero__video ${hasVideo ? "is-visible" : ""}`}
-            src={entreprise.medias.heroVideo}
-            poster={entreprise.medias.heroPoster}
+            src={resolveMedia(entreprise.medias.heroVideo)}
+            poster={resolveMedia(entreprise.medias.heroPoster)}
             autoPlay
             muted
             loop

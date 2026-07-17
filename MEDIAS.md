@@ -1,8 +1,29 @@
-# 🎬 Médias à générer (Higgsfield / IA)
+# 🎬 Médias
 
-Déposez les fichiers générés dans `public/media/` en respectant **exactement** les
-noms ci-dessous (référencés dans `src/config/entreprise.js`). En attendant, le site
-affiche des placeholders propres et ne plante pas.
+## ✅ Médias déjà générés (IA) et câblés
+
+Une première série de visuels a été **générée par IA** (Higgsfield / soul_location +
+kling3_0_turbo pour la vidéo) et est **déjà branchée** sur le site via
+`src/config/mediaRemote.js` (URLs hébergées sur CDN) :
+
+- 1 vidéo hero (piscine à débordement, coucher de soleil, push-in)
+- 1 image poster hero · 1 portrait artisan
+- 5 images de services · 8 réalisations · 5 miniatures d'avis
+
+Le site déployé les affiche directement. Pour **passer en local** (recommandé en
+prod) : téléchargez chaque URL de `mediaRemote.js` dans `public/media/` sous le nom
+local correspondant, puis videz l'objet `mediaRemote` → le site bascule
+automatiquement sur les fichiers locaux.
+
+> Pour **regénérer / remplacer** un visuel, utilisez les prompts ci-dessous.
+
+---
+
+# 🎬 Prompts de génération (pour regénérer / compléter)
+
+Déposez les fichiers dans `public/media/` en respectant **exactement** les
+noms ci-dessous (référencés dans `src/config/entreprise.js`). Sans média local ni
+URL distante, le site affiche des placeholders propres et ne plante pas.
 
 > Direction artistique commune à tous les médias :
 > eau turquoise `#2FB6C4`, ciel/mer méditerranéens, lumière dorée de fin de journée,
