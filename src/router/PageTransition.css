@@ -1,0 +1,41 @@
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 3000; /* au-dessus de la nav */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Bloom lumineux qui envahit l'écran */
+.page-transition__bloom {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    radial-gradient(60% 50% at 50% 45%, rgba(242, 246, 247, 0.9), transparent 60%),
+    radial-gradient(120% 90% at 50% 50%, rgba(47, 182, 196, 0.55), rgba(11, 20, 32, 0.85) 90%);
+  will-change: opacity;
+}
+
+/* Vague liquide (panneau turquoise avec un bord ondulé) */
+.page-transition__wave {
+  position: absolute;
+  left: -5%;
+  top: 0;
+  width: 110%;
+  height: 130%;
+  transform: translateY(100%);
+  will-change: transform;
+  background: linear-gradient(160deg, #2fb6c4 0%, #1a7a9e 45%, #0b1420 100%);
+  /* bord supérieur ondulé */
+  -webkit-mask-image: radial-gradient(120% 22px at 50% 22px, #000 98%, transparent 100%),
+    linear-gradient(#000, #000);
+  -webkit-mask-size: 24% 44px, 100% 100%;
+  -webkit-mask-position: top center, bottom center;
+  -webkit-mask-repeat: repeat-x, no-repeat;
+  mask-image: radial-gradient(120% 22px at 50% 22px, #000 98%, transparent 100%),
+    linear-gradient(#000, #000);
+  mask-size: 24% 44px, 100% 100%;
+  mask-position: top center, bottom center;
+  mask-repeat: repeat-x, no-repeat;
+}

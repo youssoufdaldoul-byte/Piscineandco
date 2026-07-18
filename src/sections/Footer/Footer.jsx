@@ -1,6 +1,6 @@
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
-import { scrollToId } from "../../lib/scroll.js";
+import { usePageTransition } from "../../router/PageTransition.jsx";
 import "./Footer.css";
 
 const RESEAUX_ICONS = {
@@ -23,6 +23,7 @@ const RESEAUX_ICONS = {
 
 export default function Footer() {
   const { t } = useLangue();
+  const { navigateTo } = usePageTransition();
   const annee = new Date().getFullYear();
   const reseaux = Object.entries(entreprise.reseaux).filter(([, url]) => url);
 
@@ -69,7 +70,7 @@ export default function Footer() {
               <span>{entreprise.horaires.semaine}</span>
               <span>{entreprise.horaires.samedi}</span>
               <span>{entreprise.horaires.dimanche}</span>
-              <a href="#devis" className="footer__cta" onClick={(e) => { e.preventDefault(); scrollToId("devis"); }}>
+              <a href="/rendez-vous" className="footer__cta" onClick={(e) => { e.preventDefault(); navigateTo("/rendez-vous"); }}>
                 {t("hero.cta")}
               </a>
             </div>

@@ -1,14 +1,37 @@
 export default {
   nav: {
+    accueil: "Accueil",
     experience: "L'expérience",
     realisations: "Réalisations",
     histoire: "Notre histoire",
+    nosPiscines: "Nos piscines",
+    rendezVous: "Rendez-vous",
     avis: "Avis clients",
     processus: "Le processus",
     devis: "Devis",
     menu: "Menu",
     fermer: "Fermer",
     langue: "Langue",
+  },
+
+  pages: {
+    histoire: {
+      eyebrow: "Notre histoire",
+      titre: "L'art né d'une passion",
+      sousTitre: "Vingt ans à sculpter l'eau sur la Côte d'Azur.",
+    },
+    piscines: {
+      eyebrow: "Le catalogue",
+      titre: "Nos piscines",
+      sousTitre: "Six signatures, une même exigence d'exception.",
+    },
+    rendezvous: {
+      eyebrow: "Rendez-vous",
+      titre: "Parlons de votre projet",
+      sousTitre: "Un conseiller vous répond sous 48h, sans engagement.",
+    },
+    retourAccueil: "Retour à l'accueil",
+    bientot: "Ce chapitre s'écrit — le contenu complet arrive très vite.",
   },
 
   hero: {

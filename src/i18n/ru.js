@@ -1,14 +1,37 @@
 export default {
   nav: {
+    accueil: "Главная",
     experience: "Наш подход",
     realisations: "Проекты",
     histoire: "Наша история",
+    nosPiscines: "Наши бассейны",
+    rendezVous: "Запись",
     avis: "Отзывы",
     processus: "Процесс",
     devis: "Смета",
     menu: "Меню",
     fermer: "Закрыть",
     langue: "Язык",
+  },
+
+  pages: {
+    histoire: {
+      eyebrow: "Наша история",
+      titre: "Искусство, рождённое страстью",
+      sousTitre: "Двадцать лет ваяния воды на Лазурном Берегу.",
+    },
+    piscines: {
+      eyebrow: "Каталог",
+      titre: "Наши бассейны",
+      sousTitre: "Шесть авторских решений — единый стандарт совершенства.",
+    },
+    rendezvous: {
+      eyebrow: "Запись",
+      titre: "Поговорим о вашем проекте",
+      sousTitre: "Консультант ответит в течение 48 часов, без обязательств.",
+    },
+    retourAccueil: "На главную",
+    bientot: "Эта глава ещё пишется — полный контент появится совсем скоро.",
   },
 
   hero: {

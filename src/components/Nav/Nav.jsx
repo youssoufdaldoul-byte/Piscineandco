@@ -1,21 +1,23 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { gsap } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
-import { scrollToId } from "../../lib/scroll.js";
+import { usePageTransition } from "../../router/PageTransition.jsx";
 import LangSwitcher from "../LangSwitcher/LangSwitcher.jsx";
 import "./Nav.css";
 
 const LIENS = [
-  { key: "experience", id: "experience" },
-  { key: "realisations", id: "realisations" },
-  { key: "histoire", id: "histoire" },
-  { key: "avis", id: "avis" },
-  { key: "processus", id: "processus" },
+  { key: "accueil", to: "/" },
+  { key: "histoire", to: "/notre-histoire" },
+  { key: "nosPiscines", to: "/nos-piscines" },
+  { key: "rendezVous", to: "/rendez-vous" },
 ];
 
 export default function Nav() {
   const { t } = useLangue();
+  const { navigateTo } = usePageTransition();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const overlayRef = useRef(null);
@@ -74,16 +76,15 @@ export default function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const go = (id) => {
+  const goTo = (to) => {
     setOpen(false);
-    // Laisse l'overlay se fermer avant de défiler
-    setTimeout(() => scrollToId(id), 60);
+    navigateTo(to);
   };
 
   return (
     <>
       <header className={`nav ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}>
-        <button className="nav__logo" onClick={() => go("accueil")} aria-label={entreprise.nom}>
+        <button className="nav__logo" onClick={() => goTo("/")} aria-label={entreprise.nom}>
           {entreprise.nom}
         </button>
 
@@ -91,7 +92,7 @@ export default function Nav() {
           <div className="nav__lang-bar">
             <LangSwitcher variant="bar" />
           </div>
-          <button className="nav__cta" onClick={() => go("devis")}>
+          <button className="nav__cta" onClick={() => goTo("/rendez-vous")}>
             {t("nav.devis")}
           </button>
           <button
@@ -116,31 +117,21 @@ export default function Nav() {
         <nav className="nav__menu">
           <ul>
             {LIENS.map((lien, i) => (
-              <li key={lien.id}>
+              <li key={lien.to}>
                 <button
                   ref={(el) => (linksRef.current[i] = el)}
-                  className="nav__link"
-                  onClick={() => go(lien.id)}
+                  className={`nav__link ${location.pathname === lien.to ? "is-current" : ""} ${lien.to === "/rendez-vous" ? "nav__link--cta" : ""}`}
+                  onClick={() => goTo(lien.to)}
                 >
                   <span className="nav__link-num">0{i + 1}</span>
                   {t(`nav.${lien.key}`)}
                 </button>
               </li>
             ))}
-            <li>
-              <button
-                ref={(el) => (linksRef.current[LIENS.length] = el)}
-                className="nav__link nav__link--cta"
-                onClick={() => go("devis")}
-              >
-                <span className="nav__link-num">0{LIENS.length + 1}</span>
-                {t("nav.devis")}
-              </button>
-            </li>
           </ul>
         </nav>
 
-        <div className="nav__footer" ref={(el) => (linksRef.current[LIENS.length + 1] = el)}>
+        <div className="nav__footer" ref={(el) => (linksRef.current[LIENS.length] = el)}>
           <LangSwitcher variant="menu" />
           <div className="nav__contact">
             <a href={`tel:${entreprise.contact.telephoneLien}`}>{entreprise.contact.telephone}</a>

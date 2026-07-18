@@ -1,14 +1,37 @@
 export default {
   nav: {
+    accueil: "Home",
     experience: "The Experience",
     realisations: "Portfolio",
     histoire: "Our Story",
+    nosPiscines: "Our Pools",
+    rendezVous: "Appointment",
     avis: "Reviews",
     processus: "The Process",
     devis: "Quote",
     menu: "Menu",
     fermer: "Close",
     langue: "Language",
+  },
+
+  pages: {
+    histoire: {
+      eyebrow: "Our story",
+      titre: "An art born of passion",
+      sousTitre: "Twenty years sculpting water on the French Riviera.",
+    },
+    piscines: {
+      eyebrow: "The collection",
+      titre: "Our pools",
+      sousTitre: "Six signatures, one standard of excellence.",
+    },
+    rendezvous: {
+      eyebrow: "Appointment",
+      titre: "Let's talk about your project",
+      sousTitre: "An advisor replies within 48h, with no obligation.",
+    },
+    retourAccueil: "Back to home",
+    bientot: "This chapter is being written — the full content is coming very soon.",
   },
 
   hero: {

@@ -1,14 +1,37 @@
 export default {
   nav: {
+    accueil: "Home",
     experience: "L'esperienza",
     realisations: "Realizzazioni",
     histoire: "La nostra storia",
+    nosPiscines: "Le nostre piscine",
+    rendezVous: "Appuntamento",
     avis: "Recensioni",
     processus: "Il processo",
     devis: "Preventivo",
     menu: "Menu",
     fermer: "Chiudi",
     langue: "Lingua",
+  },
+
+  pages: {
+    histoire: {
+      eyebrow: "La nostra storia",
+      titre: "Un'arte nata dalla passione",
+      sousTitre: "Vent'anni a scolpire l'acqua sulla Costa Azzurra.",
+    },
+    piscines: {
+      eyebrow: "Il catalogo",
+      titre: "Le nostre piscine",
+      sousTitre: "Sei firme, una sola esigenza di eccellenza.",
+    },
+    rendezvous: {
+      eyebrow: "Appuntamento",
+      titre: "Parliamo del vostro progetto",
+      sousTitre: "Un consulente vi risponde entro 48h, senza impegno.",
+    },
+    retourAccueil: "Torna alla home",
+    bientot: "Questo capitolo si sta scrivendo — il contenuto completo arriva molto presto.",
   },
 
   hero: {

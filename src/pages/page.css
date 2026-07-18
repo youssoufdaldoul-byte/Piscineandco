@@ -1,0 +1,36 @@
+.page {
+  display: block;
+}
+
+.page__placeholder {
+  text-align: center;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.page__soon {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  max-width: 40ch;
+}
+.page__links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.page__link {
+  color: var(--c-accent);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  transition: color 0.3s, transform 0.3s var(--ease-soft);
+}
+.page__link:hover {
+  color: var(--c-texte);
+  transform: translateX(4px);
+}
