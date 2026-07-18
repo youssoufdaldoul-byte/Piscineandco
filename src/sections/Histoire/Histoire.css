@@ -1,7 +1,5 @@
 .hist {
-  background:
-    radial-gradient(90% 60% at 15% 0%, var(--c-fond-clair), transparent 60%),
-    var(--c-fond);
+  background: transparent;
   overflow: hidden;
 }
 

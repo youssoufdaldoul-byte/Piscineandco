@@ -1,6 +1,5 @@
 .xp {
-  background:
-    linear-gradient(to bottom, var(--c-fond) 0%, var(--c-fond-clair) 50%, var(--c-fond) 100%);
+  background: transparent; /* le fond global (Ambiance) transparaît */
   overflow: hidden;
 }
 

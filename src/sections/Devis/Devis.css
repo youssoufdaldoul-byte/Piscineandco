@@ -1,7 +1,5 @@
 .devis {
-  background:
-    radial-gradient(100% 70% at 85% 0%, var(--c-fond-clair), transparent 55%),
-    var(--c-fond);
+  background: transparent;
   overflow: hidden;
 }
 

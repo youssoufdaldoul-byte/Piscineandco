@@ -1,5 +1,5 @@
 .proc {
-  background: var(--c-fond);
+  background: transparent;
   overflow: hidden;
 }
 

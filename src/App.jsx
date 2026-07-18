@@ -1,4 +1,5 @@
 import { useSmoothScroll } from "./hooks/useSmoothScroll.js";
+import Ambiance from "./components/Ambiance/Ambiance.jsx";
 import Nav from "./components/Nav/Nav.jsx";
 import Hero from "./sections/Hero/Hero.jsx";
 import Experience from "./sections/Experience/Experience.jsx";
@@ -14,6 +15,7 @@ export default function App() {
 
   return (
     <>
+      <Ambiance />
       <Nav />
       <main>
         <Hero />

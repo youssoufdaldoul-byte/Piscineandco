@@ -1,6 +1,5 @@
 .avis {
-  background:
-    linear-gradient(to bottom, var(--c-fond), var(--c-fond-clair) 50%, var(--c-fond));
+  background: transparent;
   overflow: hidden;
 }
 
