@@ -42,19 +42,11 @@
   order: 1;
 }
 
-/* Média + parallax (le wrapper déborde pour laisser respirer le mouvement) */
+/* Média (le parallax interne est géré par MediaImage) */
 .xp-row__media {
   position: relative;
-  overflow: hidden;
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
-}
-.xp-row__media [data-parallax] {
-  will-change: transform;
-}
-.xp-row__media [data-parallax] .media-img {
-  transform: scale(1.08); /* compense le déplacement parallax, pas de vide */
-  border-radius: 0;
 }
 
 /* Texte */
@@ -97,8 +89,5 @@
   }
   .xp-row--reverse .xp-row__text {
     order: 1;
-  }
-  .xp-row__media [data-parallax] .media-img {
-    transform: scale(1.08);
   }
 }

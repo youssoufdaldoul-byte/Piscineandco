@@ -1,5 +1,3 @@
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
 import MediaImage from "../../components/MediaImage/MediaImage.jsx";
@@ -8,44 +6,19 @@ import "./Histoire.css";
 
 export default function Histoire() {
   const { t } = useLangue();
-  const rootRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".hist__media [data-parallax]",
-        { yPercent: -6 },
-        {
-          yPercent: 6,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hist__media",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <section className="section hist" id="histoire" ref={rootRef}>
+    <section className="section hist" id="histoire">
       <div className="container hist__grid">
         {/* Colonne image */}
         <div className="hist__media">
-          <div data-parallax>
-            <MediaImage
-              src={entreprise.medias.histoireImage}
-              alt={`${entreprise.fondateur} — ${entreprise.nom}`}
-              label={entreprise.fondateur}
-              sub={t("histoire.signature")}
-              ratio="portrait"
-            />
-          </div>
+          <MediaImage
+            src={entreprise.medias.histoireImage}
+            alt={`${entreprise.fondateur} — ${entreprise.nom}`}
+            label={entreprise.fondateur}
+            sub={t("histoire.signature")}
+            ratio="portrait"
+          />
           <Reveal className="hist__badge" y={20}>
             <strong>{entreprise.stats.experience}</strong>
             <span>{t("histoire.badge")}</span>

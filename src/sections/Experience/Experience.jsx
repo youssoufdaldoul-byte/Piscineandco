@@ -1,5 +1,3 @@
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
 import MediaImage from "../../components/MediaImage/MediaImage.jsx";
@@ -8,35 +6,9 @@ import "./Experience.css";
 
 export default function Experience() {
   const { t } = useLangue();
-  const rootRef = useRef(null);
-
-  // Parallax léger sur les images au scroll
-  useLayoutEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(".xp-row__media [data-parallax]").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { yPercent: -5 },
-          {
-            yPercent: 5,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el.closest(".xp-row"),
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <section className="section xp" id="experience" ref={rootRef}>
+    <section className="section xp" id="experience">
       <div className="container">
         <header className="xp__head">
           <Reveal as="p" className="eyebrow">
@@ -57,15 +29,13 @@ export default function Experience() {
               key={service.id}
             >
               <div className="xp-row__media">
-                <div data-parallax>
-                  <MediaImage
-                    src={service.image}
-                    alt={t(`experience.services.${service.id}.titre`)}
-                    label={t(`experience.services.${service.id}.titre`)}
-                    sub={entreprise.nom}
-                    ratio={i % 2 === 0 ? "paysage" : "portrait"}
-                  />
-                </div>
+                <MediaImage
+                  src={service.image}
+                  alt={t(`experience.services.${service.id}.titre`)}
+                  label={t(`experience.services.${service.id}.titre`)}
+                  sub={entreprise.nom}
+                  ratio={i % 2 === 0 ? "paysage" : "portrait"}
+                />
               </div>
 
               <div className="xp-row__text">

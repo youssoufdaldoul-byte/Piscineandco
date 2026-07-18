@@ -72,6 +72,7 @@ export default function Avis() {
                     label={a.lieu}
                     ratio="carre"
                     showLabel={false}
+                    effects={false}
                   />
                 </div>
                 <div>

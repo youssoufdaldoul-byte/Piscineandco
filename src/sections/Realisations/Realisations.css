@@ -51,10 +51,6 @@
 }
 .rea-card__media .media-img {
   border-radius: 0;
-  transition: transform 0.9s var(--ease-water);
-}
-.rea-card:hover .media-img {
-  transform: scale(1.07);
 }
 
 /* Icône lecture pour les vidéos */

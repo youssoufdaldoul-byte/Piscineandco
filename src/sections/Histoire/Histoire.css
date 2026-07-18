@@ -16,15 +16,7 @@
 .hist__media {
   position: relative;
   border-radius: var(--radius);
-  overflow: hidden;
   box-shadow: var(--shadow-card);
-}
-.hist__media [data-parallax] {
-  will-change: transform;
-}
-.hist__media [data-parallax] .media-img {
-  transform: scale(1.08);
-  border-radius: 0;
 }
 
 /* Badge années d'expérience */
@@ -101,8 +93,5 @@
   }
   .hist__media {
     max-width: 460px;
-  }
-  .hist__media [data-parallax] .media-img {
-    transform: scale(1.05);
   }
 }
