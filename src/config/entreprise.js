@@ -156,6 +156,24 @@ export const entreprise = {
   ],
 
   // ─────────────────────────────────────────────────────────────────────────
+  //  PAGE NOTRE HISTOIRE — chronologie + savoir-faire
+  //  (images réutilisées depuis les visuels déjà générés)
+  // ─────────────────────────────────────────────────────────────────────────
+  chronologie: [
+    { id: "fondation", annee: "2004", image: "/media/services/sur-mesure.jpg" },
+    { id: "premieres", annee: "2009", image: "/media/realisations/mougins.jpg" },
+    { id: "debordement", annee: "2014", image: "/media/realisations/saint-tropez.jpg" },
+    { id: "reference", annee: "2020", image: "/media/realisations/cap-ferrat.jpg" },
+    { id: "aujourdhui", now: true, image: "/media/realisations/villa-eze.jpg" },
+  ],
+  savoirFaire: [
+    { id: "precision", image: "/media/services/sur-mesure.jpg" },
+    { id: "materiaux", image: "/media/services/debordement.jpg" },
+    { id: "suivi", image: "/media/services/entretien.jpg" },
+    { id: "garantie", image: "/media/services/renovation.jpg" },
+  ],
+
+  // ─────────────────────────────────────────────────────────────────────────
   //  LE PROCESSUS (étapes) — icône + clé de traduction
   // ─────────────────────────────────────────────────────────────────────────
   processus: [

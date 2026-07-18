@@ -39,6 +39,30 @@ export default {
     decouvrirHistoire: "Scopri la nostra storia",
   },
 
+  histoirePage: {
+    chronoEyebrow: "La cronologia",
+    chronoTitre: "Vent'anni lungo l'acqua",
+    maintenant: "Oggi",
+    chrono: {
+      fondation: { titre: "La fondazione", texte: "Laurent Vasseur fonda AZUR PISCINES con una convinzione semplice: ogni piscina deve prolungare il paesaggio." },
+      premieres: { titre: "Le prime ville", texte: "Le prime piscine di villa nascono sulle alture di Cannes e Mougins. Il passaparola fa il resto." },
+      debordement: { titre: "La firma a sfioro", texte: "La padronanza dello sfioro di fronte al mare diventa la nostra firma, riconosciuta su tutta la Riviera." },
+      reference: { titre: "Un riferimento dell'alta gamma", texte: "Ville d'eccezione, spa, corsie da nuoto: l'atelier si afferma presso una clientela internazionale esigente." },
+      aujourdhui: { titre: "Oltre 200 piscine", texte: "Più di 200 piscine realizzate, oltre 60 famiglie conquistate e la stessa passione intatta del primo giorno." },
+    },
+    savoirEyebrow: "Il saper fare",
+    savoirTitre: "Ciò che fa la differenza",
+    savoir: {
+      precision: { titre: "La precisione", texte: "Linee esatte al millimetro, un'acqua perfettamente a livello. Nulla è lasciato al caso." },
+      materiaux: { titre: "I materiali", texte: "Pietre nobili, mosaici fini, sistemi durevoli: scegliamo solo il meglio." },
+      suivi: { titre: "L'assistenza", texte: "Un unico interlocutore, dal primo schizzo fino ad anni dopo la consegna." },
+      garantie: { titre: "La garanzia", texte: "Garanzia decennale e totale serenità. Costruiamo per durare." },
+    },
+    ctaEyebrow: "Il seguito",
+    ctaTitre: "Pronti a scrivere la vostra?",
+    ctaTexte: "Scoprite i nostri modelli, o parliamo direttamente del vostro progetto.",
+  },
+
   hero: {
     titre: "L'ARTE DELLA PISCINA",
     sousTitre: "Creatore di piscine d'eccezione sulla Costa Azzurra",

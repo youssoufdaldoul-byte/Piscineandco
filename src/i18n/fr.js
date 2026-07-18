@@ -39,6 +39,30 @@ export default {
     decouvrirHistoire: "Découvrir notre histoire",
   },
 
+  histoirePage: {
+    chronoEyebrow: "La chronologie",
+    chronoTitre: "Vingt ans au fil de l'eau",
+    maintenant: "Aujourd'hui",
+    chrono: {
+      fondation: { titre: "La fondation", texte: "Laurent Vasseur crée AZUR PISCINES avec une conviction simple : chaque bassin doit prolonger le paysage." },
+      premieres: { titre: "Les premières villas", texte: "Les premières piscines de villa voient le jour sur les hauteurs de Cannes et Mougins. Le bouche-à-oreille fait le reste." },
+      debordement: { titre: "La signature débordement", texte: "La maîtrise du débordement face à la mer devient notre signature, reconnue sur toute la Riviera." },
+      reference: { titre: "Une référence du haut de gamme", texte: "Villas d'exception, spas, couloirs de nage : l'atelier s'impose auprès d'une clientèle internationale exigeante." },
+      aujourdhui: { titre: "Plus de 200 bassins", texte: "Plus de 200 piscines réalisées, 60+ familles conquises, et la même passion intacte qu'au premier jour." },
+    },
+    savoirEyebrow: "Le savoir-faire",
+    savoirTitre: "Ce qui fait la différence",
+    savoir: {
+      precision: { titre: "La précision", texte: "Des lignes justes au millimètre, une eau parfaitement de niveau. Rien n'est laissé au hasard." },
+      materiaux: { titre: "Les matériaux", texte: "Pierres nobles, mosaïques fines, systèmes durables : nous ne choisissons que le meilleur." },
+      suivi: { titre: "Le suivi", texte: "Un interlocuteur unique, de la première esquisse à des années après la livraison." },
+      garantie: { titre: "La garantie", texte: "Garantie décennale et sérénité totale. Nous construisons pour durer." },
+    },
+    ctaEyebrow: "La suite",
+    ctaTitre: "Prêt à écrire la vôtre ?",
+    ctaTexte: "Découvrez nos modèles, ou parlons directement de votre projet.",
+  },
+
   hero: {
     titre: "L'ART DE LA PISCINE",
     sousTitre: "Créateur de piscines d'exception sur la Côte d'Azur",

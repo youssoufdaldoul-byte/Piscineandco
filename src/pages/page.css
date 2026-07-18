@@ -2,6 +2,38 @@
   display: block;
 }
 
+/* Boutons partagés (pages) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.35s var(--ease-soft), box-shadow 0.35s, background 0.35s, color 0.35s;
+}
+.btn--solid {
+  background: var(--c-accent);
+  color: var(--c-fond);
+  box-shadow: 0 12px 40px -12px rgba(47, 182, 196, 0.7);
+}
+.btn--solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 50px -12px rgba(47, 182, 196, 0.9);
+}
+.btn--ghost {
+  border: 1px solid var(--c-accent);
+  color: var(--c-texte);
+}
+.btn--ghost:hover {
+  background: var(--c-accent);
+  color: var(--c-fond);
+}
+
 .page__placeholder {
   text-align: center;
   min-height: 40vh;

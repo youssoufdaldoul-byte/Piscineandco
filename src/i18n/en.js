@@ -39,6 +39,30 @@ export default {
     decouvrirHistoire: "Discover our story",
   },
 
+  histoirePage: {
+    chronoEyebrow: "The timeline",
+    chronoTitre: "Twenty years along the water",
+    maintenant: "Today",
+    chrono: {
+      fondation: { titre: "The founding", texte: "Laurent Vasseur founds AZUR PISCINES on one simple conviction: every pool must extend the landscape." },
+      premieres: { titre: "The first villas", texte: "The first villa pools rise on the hills above Cannes and Mougins. Word of mouth does the rest." },
+      debordement: { titre: "The infinity signature", texte: "Mastery of the infinity edge facing the sea becomes our signature, known across the Riviera." },
+      reference: { titre: "A benchmark of luxury", texte: "Exceptional villas, spas, swim lanes: the studio wins over a demanding international clientele." },
+      aujourdhui: { titre: "Over 200 pools", texte: "More than 200 pools built, 60+ families won over, and the same passion intact as on day one." },
+    },
+    savoirEyebrow: "The craft",
+    savoirTitre: "What makes the difference",
+    savoir: {
+      precision: { titre: "Precision", texte: "Lines true to the millimetre, water perfectly level. Nothing is left to chance." },
+      materiaux: { titre: "Materials", texte: "Noble stone, fine mosaics, lasting systems: we choose only the best." },
+      suivi: { titre: "Follow-up", texte: "A single point of contact, from the first sketch to years after delivery." },
+      garantie: { titre: "The guarantee", texte: "Ten-year warranty and total peace of mind. We build to last." },
+    },
+    ctaEyebrow: "What's next",
+    ctaTitre: "Ready to write yours?",
+    ctaTexte: "Explore our models, or let's talk about your project directly.",
+  },
+
   hero: {
     titre: "THE ART OF THE POOL",
     sousTitre: "Creator of exceptional pools on the French Riviera",

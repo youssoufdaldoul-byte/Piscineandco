@@ -1,0 +1,179 @@
+/* ============================================================================
+   PAGE NOTRE HISTOIRE
+   ============================================================================ */
+
+/* --- Chronologie --- */
+.chrono {
+  overflow: hidden;
+}
+.chrono__head {
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+.chrono__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin-top: 1rem;
+  max-width: 14ch;
+}
+
+.chrono__timeline {
+  position: relative;
+}
+.chrono__line {
+  position: absolute;
+  left: 19px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--c-ligne);
+}
+.chrono__line-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--c-accent), var(--c-or));
+  transform-origin: top center;
+}
+
+.chrono__items {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 8vw, 7rem);
+}
+.chrono__item {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: start;
+}
+.chrono__dot {
+  grid-column: 1;
+  grid-row: 1;
+  width: 16px;
+  height: 16px;
+  justify-self: center;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--c-fond-clair);
+  border: 2px solid var(--c-accent);
+  box-shadow: 0 0 0 6px var(--c-fond), 0 0 18px -2px rgba(47, 182, 196, 0.6);
+}
+.chrono__year {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  color: var(--c-or);
+  line-height: 1;
+  margin-bottom: 1.4rem;
+}
+.chrono__card {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  align-items: center;
+}
+.chrono__media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.chrono__text h3 {
+  font-size: var(--fs-h3);
+  color: var(--c-texte);
+  margin-bottom: 0.8rem;
+}
+.chrono__text p {
+  color: var(--c-texte-doux);
+  max-width: 42ch;
+}
+
+@media (max-width: 780px) {
+  .chrono__line {
+    left: 13px;
+  }
+  .chrono__item {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+  .chrono__dot {
+    width: 14px;
+    height: 14px;
+  }
+  .chrono__card {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Savoir-faire --- */
+.savoir {
+  overflow: hidden;
+}
+.savoir__head {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.savoir__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin-top: 1rem;
+}
+.savoir__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.savoir__card {
+  display: flex;
+  flex-direction: column;
+}
+.savoir__media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow-soft);
+}
+.savoir__card h3 {
+  font-size: var(--fs-h3);
+  color: var(--c-texte);
+  margin-bottom: 0.6rem;
+}
+.savoir__card p {
+  color: var(--c-texte-doux);
+  font-size: 0.98rem;
+}
+
+@media (max-width: 900px) {
+  .savoir__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .savoir__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- CTA de fin de chapitre --- */
+.chapitre-cta {
+  text-align: center;
+}
+.chapitre-cta__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin: 1rem 0 1.2rem;
+}
+.chapitre-cta__text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  max-width: 46ch;
+  margin: 0 auto 2.4rem;
+}
+.chapitre-cta__links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
