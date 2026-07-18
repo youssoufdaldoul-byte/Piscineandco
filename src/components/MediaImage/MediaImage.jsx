@@ -42,6 +42,7 @@ export default function MediaImage({
   eager = false,
   showLabel = true,
   effects = true,
+  kenburns = false,
 }) {
   const resolvedSrc = resolveMedia(src);
   const [errored, setErrored] = useState(!resolvedSrc);
@@ -102,7 +103,7 @@ export default function MediaImage({
 
   return (
     <div
-      className={`media-img ${effects ? "media-img--fx" : ""} ${className}`}
+      className={`media-img ${effects ? "media-img--fx" : ""} ${kenburns ? "media-img--kenburns" : ""} ${className}`}
       style={{ aspectRatio: RATIOS[ratio] || RATIOS.paysage }}
       ref={rootRef}
     >

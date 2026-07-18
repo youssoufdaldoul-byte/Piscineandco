@@ -156,6 +156,23 @@ export const entreprise = {
   ],
 
   // ─────────────────────────────────────────────────────────────────────────
+  //  CATALOGUE — PAGE NOS PISCINES
+  //  ⚙️ afficherPrix: false → tous les prix deviennent "Sur devis"
+  // ─────────────────────────────────────────────────────────────────────────
+  piscines: {
+    afficherPrix: true,
+    devise: "€",
+    modeles: [
+      { id: "debordement", image: "/media/realisations/saint-tropez.jpg", prixMin: 65000, dims: "10 × 4 m", profondeur: "1,4 – 2,0 m", delai: "10 – 14", entretien: "modere" },
+      { id: "miroir", image: "/media/realisations/cap-ferrat.jpg", prixMin: 80000, dims: "9 × 4 m", profondeur: "1,4 m", delai: "12 – 16", entretien: "modere" },
+      { id: "couloir", image: "/media/realisations/monaco.jpg", prixMin: 70000, dims: "15 × 3 m", profondeur: "1,4 m", delai: "10 – 14", entretien: "modere" },
+      { id: "coque", image: "/media/services/renovation.jpg", prixMin: 35000, dims: "8 × 4 m", profondeur: "1,2 – 1,6 m", delai: "3 – 5", entretien: "faible" },
+      { id: "interieure", image: "/media/realisations/antibes.jpg", prixMin: 120000, dims: "10 × 4 m", profondeur: "1,4 – 1,8 m", delai: "16 – 24", entretien: "eleve" },
+      { id: "spa", image: "/media/services/spa.jpg", prixMin: 18000, dims: "3 × 2 m", profondeur: "0,9 m", delai: "2 – 4", entretien: "faible" },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   //  PAGE NOTRE HISTOIRE — chronologie + savoir-faire
   //  (images réutilisées depuis les visuels déjà générés)
   // ─────────────────────────────────────────────────────────────────────────

@@ -123,6 +123,27 @@
   filter: none;
 }
 
+/* --- Ken-burns automatique (images plein cadre du catalogue) --- */
+.media-img--kenburns .media-img__img,
+.media-img--kenburns .media-img__placeholder {
+  animation: kenburns 24s ease-in-out infinite alternate;
+  transition: none;
+}
+.media-img--kenburns:hover .media-img__img,
+.media-img--kenburns:hover .media-img__placeholder {
+  transform: none; /* le ken-burns auto remplace le hover */
+}
+@keyframes kenburns {
+  0% { transform: scale(1.02) translate3d(0, 0, 0); }
+  100% { transform: scale(1.12) translate3d(-1.5%, -1.5%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media-img--kenburns .media-img__img,
+  .media-img--kenburns .media-img__placeholder {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .media-img--fx {
     clip-path: inset(0 0 0 0);

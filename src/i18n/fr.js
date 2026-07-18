@@ -63,6 +63,33 @@ export default {
     ctaTexte: "Découvrez nos modèles, ou parlons directement de votre projet.",
   },
 
+  piscinesPage: {
+    specs: {
+      dimensions: "Dimensions typiques",
+      profondeur: "Profondeur",
+      delai: "Délai de réalisation",
+      delaiUnite: "semaines",
+      prix: "Budget",
+      entretien: "Entretien",
+    },
+    entretien: { faible: "Faible", modere: "Modéré", eleve: "Élevé" },
+    apartir: "À partir de",
+    surdevis: "Sur devis",
+    demander: "Demander ce modèle",
+    modeles: {
+      debordement: { nom: "Piscine à débordement", desc: "L'eau se fond dans l'horizon. Face à la mer, la limite disparaît — il ne reste que le bleu." },
+      miroir: { nom: "Piscine miroir", desc: "Une surface parfaitement affleurante, comme un miroir posé sur la terrasse. L'architecture s'y reflète." },
+      couloir: { nom: "Couloir de nage", desc: "Long, pur, sculpté pour la nage. Quelques mètres de discipline et de sérénité, chaque matin." },
+      coque: { nom: "Piscine coque", desc: "La solution rapide et durable. Une coque monobloc de qualité, posée en quelques jours, sans compromis sur le style." },
+      interieure: { nom: "Piscine intérieure", desc: "Nager toute l'année, à l'abri. Lumière tamisée, reflets sur les murs — un bassin qui devient une pièce à vivre." },
+      spa: { nom: "Spa & bassin de détente", desc: "Un cocon d'eau chaude, jets et chromothérapie. La parenthèse bien-être, prolongée sous les étoiles." },
+    },
+    comparatifEyebrow: "En un coup d'œil",
+    comparatifTitre: "Comparer les modèles",
+    table: { modele: "Modèle", budget: "Budget", delai: "Délai", entretien: "Entretien" },
+    note: "Chaque projet étant unique, ces montants sont indicatifs et affinés lors de l'étude de votre terrain.",
+  },
+
   hero: {
     titre: "L'ART DE LA PISCINE",
     sousTitre: "Créateur de piscines d'exception sur la Côte d'Azur",

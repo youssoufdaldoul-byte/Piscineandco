@@ -63,6 +63,33 @@ export default {
     ctaTexte: "Explore our models, or let's talk about your project directly.",
   },
 
+  piscinesPage: {
+    specs: {
+      dimensions: "Typical size",
+      profondeur: "Depth",
+      delai: "Build time",
+      delaiUnite: "weeks",
+      prix: "Budget",
+      entretien: "Upkeep",
+    },
+    entretien: { faible: "Low", modere: "Moderate", eleve: "High" },
+    apartir: "From",
+    surdevis: "On request",
+    demander: "Request this model",
+    modeles: {
+      debordement: { nom: "Infinity pool", desc: "Water melts into the horizon. Facing the sea, the edge vanishes — only the blue remains." },
+      miroir: { nom: "Mirror pool", desc: "A perfectly flush surface, like a mirror laid on the terrace. The architecture reflects in it." },
+      couloir: { nom: "Swim lane", desc: "Long, pure, sculpted for swimming. A few metres of discipline and serenity, every morning." },
+      coque: { nom: "Composite pool", desc: "The fast, lasting solution. A quality one-piece shell, installed in days, with no compromise on style." },
+      interieure: { nom: "Indoor pool", desc: "Swim all year round, sheltered. Soft light, reflections on the walls — a pool that becomes a living space." },
+      spa: { nom: "Spa & wellness pool", desc: "A cocoon of warm water, jets and chromotherapy. The wellness pause, extended under the stars." },
+    },
+    comparatifEyebrow: "At a glance",
+    comparatifTitre: "Compare the models",
+    table: { modele: "Model", budget: "Budget", delai: "Time", entretien: "Upkeep" },
+    note: "As every project is unique, these figures are indicative and refined during the study of your site.",
+  },
+
   hero: {
     titre: "THE ART OF THE POOL",
     sousTitre: "Creator of exceptional pools on the French Riviera",

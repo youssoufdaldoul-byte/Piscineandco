@@ -1,0 +1,202 @@
+/* ============================================================================
+   PAGE NOS PISCINES — catalogue cinématique
+   ============================================================================ */
+
+.modeles {
+  position: relative;
+}
+
+/* --- Section modèle plein cadre --- */
+.modele {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.modele__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.modele__media .media-img {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+.modele__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(7, 13, 22, 0.92) 0%, rgba(7, 13, 22, 0.3) 45%, transparent 65%),
+    linear-gradient(to bottom, rgba(7, 13, 22, 0.6) 0%, transparent 22%);
+}
+.modele--alt .modele__scrim {
+  background:
+    linear-gradient(to top, rgba(7, 13, 22, 0.92) 0%, rgba(7, 13, 22, 0.3) 45%, transparent 65%),
+    linear-gradient(to bottom, rgba(7, 13, 22, 0.6) 0%, transparent 22%),
+    linear-gradient(to left, rgba(11, 20, 32, 0.4), transparent 45%);
+}
+
+.modele__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: clamp(3rem, 8vh, 6rem);
+  max-width: min(var(--max-w), 100%);
+}
+.modele__box,
+.modele__content > * {
+  max-width: 680px;
+}
+.modele__num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--c-or);
+  margin-bottom: 0.8rem;
+}
+.modele__nom {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--c-texte);
+  text-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+.modele__desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: rgba(242, 246, 247, 0.9);
+  margin-top: 1.2rem;
+  max-width: 44ch;
+}
+
+.modele__specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--c-ligne);
+  max-width: 680px;
+}
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.spec__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+}
+.spec__val {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--c-texte);
+}
+
+.modele__foot {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.modele__prix {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  color: var(--c-or);
+}
+
+/* --- Tableau comparatif --- */
+.comparatif__head {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.comparatif__title {
+  font-size: var(--fs-h1);
+  color: var(--c-texte);
+  margin-top: 1rem;
+}
+.comparatif__wrap {
+  overflow-x: auto;
+}
+.comparatif__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+.comparatif__table th,
+.comparatif__table td {
+  text-align: left;
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1px solid var(--c-ligne);
+}
+.comparatif__table th {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-or);
+  font-weight: 600;
+}
+.comparatif__table td {
+  color: var(--c-texte-doux);
+  font-size: 1rem;
+}
+.comparatif__table td:first-child {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--c-texte);
+}
+.comparatif__note {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--c-texte-faible);
+  text-align: center;
+}
+
+/* Tableau responsive : cartes empilées sur mobile */
+@media (max-width: 640px) {
+  .comparatif__wrap {
+    overflow-x: visible;
+  }
+  .comparatif__table {
+    min-width: 0;
+  }
+  .comparatif__table thead {
+    display: none;
+  }
+  .comparatif__table tr {
+    display: block;
+    border: 1px solid var(--c-ligne);
+    border-radius: var(--radius);
+    padding: 0.6rem 1rem;
+    margin-bottom: 1rem;
+    background: var(--c-verre);
+  }
+  .comparatif__table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--c-ligne);
+    padding: 0.7rem 0;
+  }
+  .comparatif__table tr td:last-child {
+    border-bottom: none;
+  }
+  .comparatif__table td::before {
+    content: attr(data-label);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-texte-faible);
+  }
+}

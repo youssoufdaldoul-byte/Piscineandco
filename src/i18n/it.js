@@ -63,6 +63,33 @@ export default {
     ctaTexte: "Scoprite i nostri modelli, o parliamo direttamente del vostro progetto.",
   },
 
+  piscinesPage: {
+    specs: {
+      dimensions: "Dimensioni tipiche",
+      profondeur: "Profondità",
+      delai: "Tempo di realizzazione",
+      delaiUnite: "settimane",
+      prix: "Budget",
+      entretien: "Manutenzione",
+    },
+    entretien: { faible: "Bassa", modere: "Moderata", eleve: "Elevata" },
+    apartir: "A partire da",
+    surdevis: "Su richiesta",
+    demander: "Richiedi questo modello",
+    modeles: {
+      debordement: { nom: "Piscina a sfioro", desc: "L'acqua si fonde con l'orizzonte. Di fronte al mare il bordo scompare — resta solo il blu." },
+      miroir: { nom: "Piscina a specchio", desc: "Una superficie perfettamente a filo, come uno specchio posato sulla terrazza. L'architettura vi si riflette." },
+      couloir: { nom: "Corsia da nuoto", desc: "Lunga, pura, scolpita per il nuoto. Qualche metro di disciplina e serenità, ogni mattina." },
+      coque: { nom: "Piscina in vetroresina", desc: "La soluzione rapida e duratura. Una monoscocca di qualità, posata in pochi giorni, senza compromessi sullo stile." },
+      interieure: { nom: "Piscina interna", desc: "Nuotare tutto l'anno, al riparo. Luce soffusa, riflessi sulle pareti — una piscina che diventa una stanza da vivere." },
+      spa: { nom: "Spa & vasca relax", desc: "Un bozzolo d'acqua calda, getti e cromoterapia. La parentesi benessere, prolungata sotto le stelle." },
+    },
+    comparatifEyebrow: "In un colpo d'occhio",
+    comparatifTitre: "Confronta i modelli",
+    table: { modele: "Modello", budget: "Budget", delai: "Tempi", entretien: "Manutenzione" },
+    note: "Poiché ogni progetto è unico, questi importi sono indicativi e affinati durante lo studio del vostro terreno.",
+  },
+
   hero: {
     titre: "L'ARTE DELLA PISCINA",
     sousTitre: "Creatore di piscine d'eccezione sulla Costa Azzurra",
