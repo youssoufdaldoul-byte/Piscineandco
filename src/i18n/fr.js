@@ -34,6 +34,11 @@ export default {
     bientot: "Ce chapitre s'écrit — le contenu complet arrive très vite.",
   },
 
+  home: {
+    teaser: "Depuis plus de {x} ans, nous dessinons des bassins d'exception sur la Côte d'Azur.",
+    decouvrirHistoire: "Découvrir notre histoire",
+  },
+
   hero: {
     titre: "L'ART DE LA PISCINE",
     sousTitre: "Créateur de piscines d'exception sur la Côte d'Azur",

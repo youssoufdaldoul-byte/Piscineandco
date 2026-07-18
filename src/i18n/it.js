@@ -34,6 +34,11 @@ export default {
     bientot: "Questo capitolo si sta scrivendo — il contenuto completo arriva molto presto.",
   },
 
+  home: {
+    teaser: "Da oltre {x} anni disegniamo piscine d'eccezione sulla Costa Azzurra.",
+    decouvrirHistoire: "Scopri la nostra storia",
+  },
+
   hero: {
     titre: "L'ARTE DELLA PISCINA",
     sousTitre: "Creatore di piscine d'eccezione sulla Costa Azzurra",

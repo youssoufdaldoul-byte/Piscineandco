@@ -34,6 +34,11 @@ export default {
     bientot: "This chapter is being written — the full content is coming very soon.",
   },
 
+  home: {
+    teaser: "For over {x} years, we have been designing exceptional pools on the French Riviera.",
+    decouvrirHistoire: "Discover our story",
+  },
+
   hero: {
     titre: "THE ART OF THE POOL",
     sousTitre: "Creator of exceptional pools on the French Riviera",
