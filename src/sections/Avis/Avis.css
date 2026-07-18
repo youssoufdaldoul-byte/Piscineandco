@@ -85,11 +85,11 @@
   margin-bottom: var(--wall-gap);
   padding: clamp(1.2rem, 1.8vw, 1.6rem);
   border-radius: 14px;
-  background: rgba(18, 32, 47, 0.42);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* Verre translucide sans backdrop-filter (pas de recalcul de flou par frame
+     sur les cartes en mouvement → 60fps sur le marquee) */
+  background: linear-gradient(155deg, rgba(30, 52, 72, 0.55), rgba(11, 22, 36, 0.5));
   border: 1px solid rgba(242, 246, 247, 0.12);
-  box-shadow: 0 22px 50px -28px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 22px 50px -28px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(242, 246, 247, 0.08);
 }
 .wall-card__text {
   font-family: var(--font-serif);
@@ -132,7 +132,7 @@
 
 /* Profondeur : colonne centrale plus présente, colonnes latérales en retrait */
 .wall-col--mid .wall-card {
-  background: rgba(18, 32, 47, 0.58);
+  background: linear-gradient(155deg, rgba(36, 62, 84, 0.66), rgba(14, 28, 44, 0.62));
   border-color: rgba(242, 246, 247, 0.18);
 }
 .wall-col--side .wall-card {

@@ -103,9 +103,10 @@
   mask-image: radial-gradient(115% 100% at 50% 55%, transparent 42%, #000 82%);
 }
 @media (max-width: 760px) {
+  /* Flou de mouvement désactivé sur mobile (backdrop-filter trop coûteux
+     pendant le zoom de la caméra) */
   .hero__blur {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    display: none;
   }
 }
 
