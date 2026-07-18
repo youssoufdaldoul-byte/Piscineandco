@@ -1,12 +1,22 @@
 /* ============================================================================
-   HERO CINÉMATIQUE
+   HERO CINÉMATIQUE — SÉQUENCE DU PLONGEON (4 actes)
    .hero définit la distance de scroll ; .hero__stage est épinglé (pin).
    ============================================================================ */
 
 .hero {
   position: relative;
-  height: 250vh; /* distance de scroll pour le push-in */
+  height: 500vh; /* longue séquence = vrai plongeon, pas un saut */
   background: var(--c-fond);
+}
+@media (max-width: 760px) {
+  .hero {
+    height: 300vh; /* pin réduit sur mobile (perf) mais même structure 4 actes */
+  }
+}
+/* Repli sans mouvement */
+.hero--static {
+  height: 100vh;
+  height: 100svh;
 }
 
 .hero__stage {
@@ -17,15 +27,20 @@
   overflow: hidden;
 }
 
-/* --- Fond --- */
-.hero__bg {
+/* --- MONDE (caméra) : au-dessus de l'eau, scale piloté au scroll --- */
+.hero__world {
   position: absolute;
   inset: 0;
+  z-index: 1;
   will-change: transform;
-  transform-origin: 50% 60%;
-  /* Repli aquatique instantané avant le chargement de la surface d'eau 3D */
-  background:
-    linear-gradient(to bottom, #0b1420 0%, #123243 42%, #1a7a9e 58%, #123243 75%, #0b1420 100%);
+  transform-origin: 50% 58%;
+}
+.hero__above {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+  /* Repli aquatique instantané avant le chargement de la surface 3D */
+  background: linear-gradient(to bottom, #0b1420 0%, #123243 42%, #1a7a9e 58%, #123243 75%, #0b1420 100%);
 }
 
 .water-canvas {
@@ -63,20 +78,71 @@
   pointer-events: none;
 }
 
-/* Voile de transition vers la section suivante (apparaît au scroll) */
-.hero__veil {
+/* Halo doré du couchant à l'horizon (Act 1) */
+.hero__glow {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: linear-gradient(to bottom, transparent 40%, var(--c-fond) 96%);
   pointer-events: none;
+  background:
+    radial-gradient(60% 40% at 50% 42%, rgba(201, 168, 106, 0.5), transparent 60%),
+    radial-gradient(120% 60% at 50% 46%, rgba(47, 182, 196, 0.22), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* --- Flou de mouvement sur les bords (masque radial) --- */
+.hero__blur {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: radial-gradient(115% 100% at 50% 55%, transparent 42%, #000 82%);
+  mask-image: radial-gradient(115% 100% at 50% 55%, transparent 42%, #000 82%);
+}
+@media (max-width: 760px) {
+  .hero__blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* --- SOUS L'EAU (Act 4) --- */
+.hero__underwater {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  will-change: opacity, filter;
+}
+
+/* --- Flash de contact (Act 3) --- */
+.hero__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 55%, #ffffff 0%, #d7f4f7 30%, #2fb6c4 70%, rgba(47, 182, 196, 0) 100%);
+}
+
+/* --- Résurgence lumineuse vers la section suivante (fin Act 4) --- */
+.hero__resurface {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(80% 60% at 50% 8%, rgba(242, 246, 247, 0.85), rgba(47, 182, 196, 0.15) 45%, transparent 75%);
 }
 
 /* --- Contenu --- */
 .hero__content {
-  position: relative;
-  z-index: 3;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,7 +151,6 @@
   padding: 0 var(--pad-x);
   will-change: transform, opacity;
 }
-
 .hero__inner {
   max-width: 900px;
 }
@@ -97,9 +162,8 @@
   text-transform: uppercase;
   color: var(--c-or);
   margin-bottom: 1.4rem;
-  padding-left: 0.45em; /* compense le letter-spacing */
+  padding-left: 0.45em;
 }
-
 .hero__title {
   font-family: var(--font-serif);
   font-weight: 500;
@@ -110,7 +174,6 @@
   text-shadow: 0 10px 60px rgba(0, 0, 0, 0.45);
   margin-bottom: 1.5rem;
 }
-
 .hero__subtitle {
   font-family: var(--font-serif);
   font-style: italic;
@@ -120,7 +183,6 @@
   margin: 0 auto 2.6rem;
 }
 
-/* CTA */
 .hero__cta {
   display: inline-flex;
   align-items: center;
@@ -146,7 +208,6 @@
   transform: translateX(4px);
 }
 
-/* Indicateur de scroll */
 .hero__scroll {
   position: absolute;
   bottom: clamp(1.5rem, 4vh, 3rem);
@@ -186,10 +247,14 @@
 }
 
 @media (max-width: 640px) {
-  .hero__subtitle {
-    margin-bottom: 2rem;
-  }
-  .hero__scroll-line {
-    height: 40px;
-  }
+  .hero__subtitle { margin-bottom: 2rem; }
+  .hero__scroll-line { height: 40px; }
+}
+
+/* Repli sans mouvement : on masque les couches de séquence */
+.hero--static .hero__blur,
+.hero--static .hero__underwater,
+.hero--static .hero__flash,
+.hero--static .hero__resurface {
+  display: none;
 }

@@ -1,0 +1,44 @@
+.underwater {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.underwater__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.underwater__canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Bulles remontantes */
+.underwater__bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.bubble {
+  position: absolute;
+  bottom: -6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(207, 240, 245, 0.25) 55%, transparent 72%);
+  box-shadow: 0 0 6px rgba(207, 240, 245, 0.35);
+  animation: bubbleRise var(--dur, 8s) linear var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+@keyframes bubbleRise {
+  0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate3d(calc(var(--drift, 0px) * 0.5), -55vh, 0) scale(1); }
+  90% { opacity: 0.6; }
+  100% { transform: translate3d(var(--drift, 0px), -108vh, 0) scale(1.05); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble { animation: none; opacity: 0.18 !important; }
+}
