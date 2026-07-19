@@ -21,6 +21,21 @@ export const mediaRemote = {
   "/media/hero/hero.mp4": `${CDN}/hf_20260717_234454_3cb55dfa-f660-4312-ad96-e69f9deb3275.mp4`,
   "/media/hero/hero-poster.jpg": `${CDN}/hf_20260717_234531_dd44277f-38e1-46f1-af52-06b00476a2fb_min.webp`,
 
+  // Hero — séquence de construction (même cadrage, time-lapse)
+  "/media/hero-construction/etape-1.jpg": `${CDN}/hf_20260719_114556_4148fe98-27d4-4df5-8ce6-2686f1084712_min.webp`,
+  "/media/hero-construction/etape-2.jpg": `${CDN}/hf_20260719_114733_787f7c68-8db3-4958-b733-ba563fae99b4_min.webp`,
+  "/media/hero-construction/etape-3.jpg": `${CDN}/hf_20260719_114737_b4497187-b2c3-4ccc-97c7-dec3f0436d6c_min.webp`,
+  "/media/hero-construction/etape-4.jpg": `${CDN}/hf_20260719_114749_9e2ed19f-3f76-4906-8385-3fa09cda8564_min.webp`,
+  "/media/hero-construction/etape-5.jpg": `${CDN}/hf_20260719_114754_d20b7893-9e79-4b02-b5a2-44a182601ece_min.webp`,
+
+  // Catalogue — images "avant" (même cadrage que le modèle "après")
+  "/media/avant-apres/debordement-avant.jpg": `${CDN}/hf_20260719_114636_b401e6c9-bc5b-4b13-8615-cc3dc2eb1973_min.webp`,
+  "/media/avant-apres/miroir-avant.jpg": `${CDN}/hf_20260719_114639_82820b8d-3988-42e2-8226-d88e56e45e87_min.webp`,
+  "/media/avant-apres/couloir-avant.jpg": `${CDN}/hf_20260719_115106_02e1219c-13ab-4981-b463-1d4cc3333453_min.webp`,
+  "/media/avant-apres/coque-avant.jpg": `${CDN}/hf_20260719_115108_61e697a0-64d0-44bb-b4f8-b407c35894d3_min.webp`,
+  "/media/avant-apres/interieure-avant.jpg": `${CDN}/hf_20260719_115111_a124ac93-979b-474c-ae3c-90078fae7344_min.webp`,
+  "/media/avant-apres/spa-avant.jpg": `${CDN}/hf_20260719_115113_4acc083b-86aa-4b3b-b248-7741b5f01d49_min.webp`,
+
   // Artisan
   "/media/histoire/artisan.jpg": `${CDN}/hf_20260717_235530_931725db-8274-4bcd-83b5-bdc8e4cf1802_min.webp`,
 

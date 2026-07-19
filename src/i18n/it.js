@@ -123,7 +123,14 @@ export default {
     titre: "L'ARTE DELLA PISCINA",
     sousTitre: "Creatore di piscine d'eccezione sulla Costa Azzurra",
     cta: "Richiedi un preventivo",
-    scroll: "Scorri per immergerti",
+    scroll: "Scorri per veder nascere la tua piscina",
+    etapes: [
+      { titre: "Qui non c'era nulla.", sous: "Un terreno nudo, una promessa." },
+      { titre: "Poi siamo arrivati.", sous: "La squadra, i mezzi, il primo giorno." },
+      { titre: "Lo scavo.", sous: "Disegniamo il vuoto che diventerà acqua." },
+      { titre: "La struttura. Il saper fare.", sous: "Cemento, ferro, precisione." },
+      { titre: "Ed ecco cosa diventa il tuo giardino.", sous: "Il riempimento. Il sogno, compiuto." },
+    ],
   },
 
   experience: {

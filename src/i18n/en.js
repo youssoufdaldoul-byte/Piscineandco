@@ -123,7 +123,14 @@ export default {
     titre: "THE ART OF THE POOL",
     sousTitre: "Creator of exceptional pools on the French Riviera",
     cta: "Request a quote",
-    scroll: "Scroll to dive in",
+    scroll: "Scroll to watch your pool come to life",
+    etapes: [
+      { titre: "Here, there was nothing.", sous: "A bare plot, a promise." },
+      { titre: "Then we arrived.", sous: "The team, the machines, day one." },
+      { titre: "The excavation.", sous: "We carve the void that becomes water." },
+      { titre: "The structure. The craft.", sous: "Concrete, steel, precision." },
+      { titre: "And this is what your garden becomes.", sous: "Filling day. The dream, complete." },
+    ],
   },
 
   experience: {

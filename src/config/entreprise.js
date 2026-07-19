@@ -162,15 +162,30 @@ export const entreprise = {
   piscines: {
     afficherPrix: true,
     devise: "€",
+    //  Chaque modèle a une image "après" (image) + une image "avant" (avant)
+    //  au cadrage identique, pour le comparateur du catalogue.
     modeles: [
-      { id: "debordement", image: "/media/realisations/saint-tropez.jpg", prixMin: 65000, dims: "10 × 4 m", profondeur: "1,4 – 2,0 m", delai: "10 – 14", entretien: "modere" },
-      { id: "miroir", image: "/media/realisations/cap-ferrat.jpg", prixMin: 80000, dims: "9 × 4 m", profondeur: "1,4 m", delai: "12 – 16", entretien: "modere" },
-      { id: "couloir", image: "/media/realisations/monaco.jpg", prixMin: 70000, dims: "15 × 3 m", profondeur: "1,4 m", delai: "10 – 14", entretien: "modere" },
-      { id: "coque", image: "/media/services/renovation.jpg", prixMin: 35000, dims: "8 × 4 m", profondeur: "1,2 – 1,6 m", delai: "3 – 5", entretien: "faible" },
-      { id: "interieure", image: "/media/realisations/antibes.jpg", prixMin: 120000, dims: "10 × 4 m", profondeur: "1,4 – 1,8 m", delai: "16 – 24", entretien: "eleve" },
-      { id: "spa", image: "/media/services/spa.jpg", prixMin: 18000, dims: "3 × 2 m", profondeur: "0,9 m", delai: "2 – 4", entretien: "faible" },
+      { id: "debordement", image: "/media/realisations/saint-tropez.jpg", avant: "/media/avant-apres/debordement-avant.jpg", prixMin: 65000, dims: "10 × 4 m", profondeur: "1,4 – 2,0 m", delai: "10 – 14", entretien: "modere" },
+      { id: "miroir", image: "/media/realisations/cap-ferrat.jpg", avant: "/media/avant-apres/miroir-avant.jpg", prixMin: 80000, dims: "9 × 4 m", profondeur: "1,4 m", delai: "12 – 16", entretien: "modere" },
+      { id: "couloir", image: "/media/realisations/monaco.jpg", avant: "/media/avant-apres/couloir-avant.jpg", prixMin: 70000, dims: "15 × 3 m", profondeur: "1,4 m", delai: "10 – 14", entretien: "modere" },
+      { id: "coque", image: "/media/services/renovation.jpg", avant: "/media/avant-apres/coque-avant.jpg", prixMin: 35000, dims: "8 × 4 m", profondeur: "1,2 – 1,6 m", delai: "3 – 5", entretien: "faible" },
+      { id: "interieure", image: "/media/realisations/antibes.jpg", avant: "/media/avant-apres/interieure-avant.jpg", prixMin: 120000, dims: "10 × 4 m", profondeur: "1,4 – 1,8 m", delai: "16 – 24", entretien: "eleve" },
+      { id: "spa", image: "/media/services/spa.jpg", avant: "/media/avant-apres/spa-avant.jpg", prixMin: 18000, dims: "3 × 2 m", profondeur: "0,9 m", delai: "2 – 4", entretien: "faible" },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  //  HERO — SÉQUENCE DE CONSTRUCTION (même cadrage, comme un time-lapse)
+  //  Le jardin ne bouge pas : seul son contenu évolue au fil du scroll.
+  //  Les textes de chaque étape viennent de i18n (hero.etapes[i]).
+  // ─────────────────────────────────────────────────────────────────────────
+  heroConstruction: [
+    { id: "vide", image: "/media/hero-construction/etape-1.jpg" },
+    { id: "equipe", image: "/media/hero-construction/etape-2.jpg" },
+    { id: "terrassement", image: "/media/hero-construction/etape-3.jpg" },
+    { id: "structure", image: "/media/hero-construction/etape-4.jpg" },
+    { id: "eau", image: "/media/hero-construction/etape-5.jpg" },
+  ],
 
   // ─────────────────────────────────────────────────────────────────────────
   //  PAGE NOTRE HISTOIRE — chronologie + savoir-faire

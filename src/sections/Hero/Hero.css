@@ -1,19 +1,20 @@
 /* ============================================================================
-   HERO CINÉMATIQUE — SÉQUENCE DU PLONGEON (4 actes)
+   HERO — SÉQUENCE DE CONSTRUCTION (time-lapse à cadrage fixe)
    .hero définit la distance de scroll ; .hero__stage est épinglé (pin).
+   Le cadrage ne bouge jamais : seules les scènes se succèdent en fondu.
    ============================================================================ */
 
 .hero {
   position: relative;
-  height: 500vh; /* longue séquence = vrai plongeon, pas un saut */
+  height: 560vh; /* longue séquence = vraie transformation, pas un saut */
   background: var(--c-fond);
 }
 @media (max-width: 760px) {
   .hero {
-    height: 300vh; /* pin réduit sur mobile (perf) mais même structure 4 actes */
+    height: 380vh; /* pin réduit sur mobile (perf), même structure 5 étapes */
   }
 }
-/* Repli sans mouvement */
+/* Repli sans mouvement : on montre l'image finale, figée */
 .hero--static {
   height: 100vh;
   height: 100svh;
@@ -27,123 +28,73 @@
   overflow: hidden;
 }
 
-/* --- MONDE (caméra) : au-dessus de l'eau, scale piloté au scroll --- */
-.hero__world {
+/* --- Empilement des scènes (même cadrage) --- */
+.hero__frame {
   position: absolute;
   inset: 0;
   z-index: 1;
-  will-change: transform;
-  transform-origin: 50% 58%;
 }
-.hero__above {
+.hero__layer {
   position: absolute;
   inset: 0;
+  background-size: cover;
+  background-position: center 55%;
+  background-repeat: no-repeat;
   will-change: opacity;
-  /* Repli aquatique instantané avant le chargement de la surface 3D */
-  background: linear-gradient(to bottom, #0b1420 0%, #123243 42%, #1a7a9e 58%, #123243 75%, #0b1420 100%);
+  transform: translateZ(0);
 }
-
-.water-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.water-canvas canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.hero__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease-water);
-}
-.hero__video.is-visible {
-  opacity: 1;
-}
-
-/* Voile permanent pour la lisibilité du texte */
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top, rgba(11, 20, 32, 0.85) 0%, rgba(11, 20, 32, 0.1) 40%, rgba(11, 20, 32, 0.35) 100%),
-    radial-gradient(120% 80% at 50% 30%, transparent 40%, rgba(11, 20, 32, 0.55) 100%);
-  pointer-events: none;
-}
-
-/* Halo doré du couchant à l'horizon (Act 1) */
-.hero__glow {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(60% 40% at 50% 42%, rgba(201, 168, 106, 0.5), transparent 60%),
-    radial-gradient(120% 60% at 50% 46%, rgba(47, 182, 196, 0.22), transparent 70%);
-  mix-blend-mode: screen;
-}
-
-/* --- Flou de mouvement sur les bords (masque radial) --- */
-.hero__blur {
-  position: absolute;
-  inset: 0;
+/* Étape finale (mise en eau) : dévoilée du bas vers le haut */
+.hero__layer--water {
   z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  -webkit-mask-image: radial-gradient(115% 100% at 50% 55%, transparent 42%, #000 82%);
-  mask-image: radial-gradient(115% 100% at 50% 55%, transparent 42%, #000 82%);
+  will-change: clip-path;
 }
-@media (max-width: 760px) {
-  /* Flou de mouvement désactivé sur mobile (backdrop-filter trop coûteux
-     pendant le zoom de la caméra) */
-  .hero__blur {
-    display: none;
-  }
-}
+/* Repli statique : seule l'image finale reste visible */
+.hero--static .hero__layer { opacity: 0 !important; }
+.hero--static .hero__layer--water { opacity: 1 !important; clip-path: none !important; }
 
-/* --- SOUS L'EAU (Act 4) --- */
-.hero__underwater {
+/* --- Voile permanent pour la lisibilité du texte --- */
+.hero__scrim {
   position: absolute;
   inset: 0;
   z-index: 3;
-  opacity: 0;
-  will-change: opacity, filter;
-}
-
-/* --- Flash de contact (Act 3) --- */
-.hero__flash {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  opacity: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 55%, #ffffff 0%, #d7f4f7 30%, #2fb6c4 70%, rgba(47, 182, 196, 0) 100%);
+  background:
+    linear-gradient(to top, rgba(11, 20, 32, 0.9) 0%, rgba(11, 20, 32, 0.15) 45%, rgba(11, 20, 32, 0.55) 100%),
+    radial-gradient(120% 85% at 50% 32%, transparent 42%, rgba(11, 20, 32, 0.5) 100%);
 }
 
-/* --- Résurgence lumineuse vers la section suivante (fin Act 4) --- */
-.hero__resurface {
+/* --- Poussière du terrassement (étape 3) --- */
+.hero__dust {
   position: absolute;
   inset: 0;
   z-index: 4;
-  opacity: 0;
   pointer-events: none;
-  background: radial-gradient(80% 60% at 50% 8%, rgba(242, 246, 247, 0.85), rgba(47, 182, 196, 0.15) 45%, transparent 75%);
+  opacity: 0;
+  will-change: opacity;
+}
+.hero__dust span {
+  position: absolute;
+  bottom: 22%;
+  left: calc(6% + (var(--i) * 6.3%));
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 197, 160, 0.9), rgba(214, 197, 160, 0) 70%);
+  animation: heroDust calc(5s + (var(--i) * 0.4s)) linear infinite;
+  animation-delay: calc(var(--i) * -0.55s);
+}
+@keyframes heroDust {
+  0% { transform: translate3d(0, 20px, 0) scale(0.6); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.5; }
+  100% { transform: translate3d(18px, -120px, 0) scale(1.3); opacity: 0; }
 }
 
-/* --- Contenu --- */
-.hero__content {
+/* --- Accroche de départ --- */
+.hero__intro {
   position: absolute;
-  inset: 0;
   z-index: 6;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -152,17 +103,13 @@
   padding: 0 var(--pad-x);
   will-change: transform, opacity;
 }
-.hero__inner {
-  max-width: 900px;
-}
-
 .hero__eyebrow {
   font-family: var(--font-sans);
   font-size: clamp(0.7rem, 1.6vw, 0.85rem);
   letter-spacing: 0.45em;
   text-transform: uppercase;
   color: var(--c-or);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.3rem;
   padding-left: 0.45em;
 }
 .hero__title {
@@ -172,18 +119,58 @@
   line-height: 0.98;
   letter-spacing: 0.02em;
   color: var(--c-texte);
-  text-shadow: 0 10px 60px rgba(0, 0, 0, 0.45);
-  margin-bottom: 1.5rem;
-}
-.hero__subtitle {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: var(--fs-h3);
-  color: rgba(242, 246, 247, 0.86);
-  max-width: 620px;
-  margin: 0 auto 2.6rem;
+  text-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
 }
 
+/* --- Légendes narratives (une par étape, en fondu) --- */
+.hero__captions {
+  position: absolute;
+  z-index: 6;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: clamp(9rem, 20vh, 13rem);
+  pointer-events: none;
+}
+.hero__caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  max-width: 40ch;
+  will-change: transform, opacity;
+}
+.hero__caption-num {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  color: var(--c-or);
+  margin-bottom: 0.8rem;
+}
+.hero__caption-titre {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 5.2vw, 3.6rem);
+  line-height: 1.02;
+  color: var(--c-texte);
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+}
+.hero__caption-sous {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  color: rgba(242, 246, 247, 0.82);
+  margin-top: 0.7rem;
+}
+
+/* --- CTA final (mise en eau) --- */
+.hero__cta-wrap {
+  position: absolute;
+  z-index: 7;
+  left: var(--pad-x);
+  bottom: clamp(3rem, 9vh, 5.5rem);
+  will-change: transform, opacity;
+}
 .hero__cta {
   display: inline-flex;
   align-items: center;
@@ -196,21 +183,19 @@
   font-size: 0.98rem;
   letter-spacing: 0.02em;
   box-shadow: 0 12px 40px -12px rgba(47, 182, 196, 0.7);
-  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft), background 0.4s;
+  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft);
 }
-.hero__cta svg {
-  transition: transform 0.4s var(--ease-soft);
-}
+.hero__cta svg { transition: transform 0.4s var(--ease-soft); }
 .hero__cta:hover {
   transform: translateY(-3px);
   box-shadow: 0 18px 50px -12px rgba(47, 182, 196, 0.85);
 }
-.hero__cta:hover svg {
-  transform: translateX(4px);
-}
+.hero__cta:hover svg { transform: translateX(4px); }
 
+/* --- Indicateur de défilement --- */
 .hero__scroll {
   position: absolute;
+  z-index: 6;
   bottom: clamp(1.5rem, 4vh, 3rem);
   left: 50%;
   transform: translateX(-50%);
@@ -218,6 +203,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.9rem;
+  will-change: opacity;
 }
 .hero__scroll-label {
   font-size: 0.68rem;
@@ -247,15 +233,20 @@
   60%, 100% { transform: translateY(300%); }
 }
 
+/* --- Repli statique : accroche + CTA visibles, légendes masquées --- */
+.hero--static .hero__dust,
+.hero--static .hero__scroll,
+.hero--static .hero__caption:not(:last-child) { display: none; }
+.hero--static .hero__cta-wrap { opacity: 1 !important; }
+
+@media (max-width: 760px) {
+  .hero__dust { display: none; } /* particules coûteuses sur mobile */
+  .hero__captions { bottom: clamp(8rem, 22vh, 11rem); }
+}
 @media (max-width: 640px) {
-  .hero__subtitle { margin-bottom: 2rem; }
   .hero__scroll-line { height: 40px; }
 }
 
-/* Repli sans mouvement : on masque les couches de séquence */
-.hero--static .hero__blur,
-.hero--static .hero__underwater,
-.hero--static .hero__flash,
-.hero--static .hero__resurface {
-  display: none;
+@media (prefers-reduced-motion: reduce) {
+  .hero__dust, .hero__scroll-line::after { animation: none; }
 }

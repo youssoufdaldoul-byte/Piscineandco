@@ -123,7 +123,14 @@ export default {
     titre: "L'ART DE LA PISCINE",
     sousTitre: "Créateur de piscines d'exception sur la Côte d'Azur",
     cta: "Demander un devis",
-    scroll: "Défilez pour plonger",
+    scroll: "Défilez pour voir naître votre piscine",
+    etapes: [
+      { titre: "Ici, il n'y avait rien.", sous: "Un terrain nu, une promesse." },
+      { titre: "Puis nous sommes arrivés.", sous: "L'équipe, le matériel, le premier jour." },
+      { titre: "Le terrassement.", sous: "On dessine le vide qui deviendra l'eau." },
+      { titre: "La structure. Le savoir-faire.", sous: "Béton, ferraillage, précision." },
+      { titre: "Et voilà ce que devient votre jardin.", sous: "La mise en eau. Le rêve, achevé." },
+    ],
   },
 
   experience: {
