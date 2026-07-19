@@ -1,20 +1,18 @@
 /* ============================================================================
-   HERO — SÉQUENCE DE CONSTRUCTION (time-lapse à cadrage fixe)
-   .hero définit la distance de scroll ; .hero__stage est épinglé (pin).
-   Le cadrage ne bouge jamais : seules les scènes se succèdent en fondu.
+   HERO — CHANTIER VIVANT (cadrage fixe, masques animés, éléments qui bougent)
+   .hero = distance de scroll ; .hero__stage = épinglé (pin).
+   Aucun fondu entre étapes : masques qui grandissent, éléments qui entrent,
+   niveaux qui montent. Tout est piloté au scroll (une timeline maître).
    ============================================================================ */
 
 .hero {
   position: relative;
-  height: 560vh; /* longue séquence = vraie transformation, pas un saut */
+  height: 620vh;
   background: var(--c-fond);
 }
 @media (max-width: 760px) {
-  .hero {
-    height: 380vh; /* pin réduit sur mobile (perf), même structure 5 étapes */
-  }
+  .hero { height: 420vh; }
 }
-/* Repli sans mouvement : on montre l'image finale, figée */
 .hero--static {
   height: 100vh;
   height: 100svh;
@@ -28,72 +26,199 @@
   overflow: hidden;
 }
 
-/* --- Empilement des scènes (même cadrage) --- */
-.hero__frame {
+/* --- Scène : empilement des couches --- */
+.hero__scene {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
-.hero__layer {
+
+/* Plaques d'étape (image plein cadre, révélée par masque) */
+.hero__plate {
   position: absolute;
   inset: 0;
+  transform-origin: 50% 56%;
+  will-change: transform, clip-path;
+}
+.hero__plate-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   background-size: cover;
   background-position: center 55%;
   background-repeat: no-repeat;
-  will-change: opacity;
-  transform: translateZ(0);
 }
-/* Étape finale (mise en eau) : dévoilée du bas vers le haut */
-.hero__layer--water {
-  z-index: 2;
-  will-change: clip-path;
+.hero__plate--empty { z-index: 1; }
+.hero__plate--dig {
+  z-index: 3;
+  /* ellipse qui s'ouvre depuis le centre du futur bassin */
+  clip-path: ellipse(calc(var(--dig, 0) * 82%) calc(var(--dig, 0) * 70%) at 50% 60%);
 }
-/* Repli statique : seule l'image finale reste visible */
-.hero--static .hero__layer { opacity: 0 !important; }
-.hero--static .hero__layer--water { opacity: 1 !important; clip-path: none !important; }
+.hero__plate--structure {
+  z-index: 4;
+  /* révélation du bas vers le haut (les murs sortent de terre) */
+  clip-path: inset(calc((1 - var(--rise, 0)) * 100%) 0% 0% 0%);
+}
+.hero__plate--water {
+  z-index: 5;
+  /* la hauteur d'eau monte */
+  clip-path: inset(calc((1 - var(--water, 0)) * 100%) 0% 0% 0%);
+}
+.hero__dig-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-/* --- Voile permanent pour la lisibilité du texte --- */
+/* Reflets d'eau animés (surface qui vit) */
+.hero__caustic {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.5) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.4) 0 2px, transparent 3px),
+    repeating-linear-gradient(115deg, rgba(180, 235, 240, 0.12) 0 8px, transparent 8px 22px);
+  background-size: 180px 180px, 220px 220px, 100% 100%;
+  animation: heroCaustic 9s linear infinite;
+}
+@keyframes heroCaustic {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 120px 60px, -90px 80px, 60px 0; }
+}
+
+/* Ligne de reflet à la surface (monte avec l'eau) */
+.hero__shimmer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(214, 246, 250, 0.95) 45%, rgba(255, 255, 255, 0.9) 55%, transparent);
+  filter: blur(0.5px);
+  box-shadow: 0 0 24px rgba(180, 235, 245, 0.7);
+  overflow: hidden;
+}
+.hero__shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  transform: translateX(-100%);
+  animation: heroSheen 3.2s ease-in-out infinite;
+}
+@keyframes heroSheen {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+/* --- Éléments qui ENTRENT (PNG détourés) --- */
+.hero__prop {
+  position: absolute;
+  z-index: 2;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
+}
+.hero__prop--excavator { left: 40%; bottom: 12%; width: 36%; height: 46%; background-position: bottom left; }
+.hero__prop--truck { left: 6%; bottom: 15%; width: 28%; height: 34%; }
+.hero__prop--workers { left: 30%; bottom: 11%; width: 18%; height: 34%; }
+
+/* --- Particules --- */
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  will-change: opacity;
+}
+.hero__particles span {
+  position: absolute;
+  border-radius: 50%;
+}
+/* Pollen (jardin vide) */
+.hero__particles--pollen span {
+  bottom: 18%;
+  left: calc(4% + (var(--i) * 6%));
+  width: 5px; height: 5px;
+  background: radial-gradient(circle, rgba(255, 244, 214, 0.9), transparent 70%);
+  animation: heroPollen calc(7s + (var(--i) * 0.5s)) linear infinite;
+  animation-delay: calc(var(--i) * -0.6s);
+}
+@keyframes heroPollen {
+  0% { transform: translate3d(0, 20px, 0); opacity: 0; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.5; }
+  100% { transform: translate3d(16px, -180px, 0); opacity: 0; }
+}
+/* Poussière / terre (terrassement) */
+.hero__particles--dust span {
+  bottom: 34%;
+  left: calc(24% + (var(--i) * 3%));
+  width: 6px; height: 6px;
+  background: radial-gradient(circle, rgba(196, 168, 120, 0.9), transparent 70%);
+  animation: heroDustP calc(3.4s + (var(--i) * 0.25s)) ease-in infinite;
+  animation-delay: calc(var(--i) * -0.4s);
+}
+@keyframes heroDustP {
+  0% { transform: translate3d(0, -8px, 0) scale(0.5); opacity: 0; }
+  25% { opacity: 0.85; }
+  100% { transform: translate3d(24px, 90px, 0) scale(1.3); opacity: 0; }
+}
+/* Gouttelettes (mise en eau) */
+.hero__particles--spray span {
+  bottom: 30%;
+  left: calc(30% + (var(--i) * 2.6%));
+  width: 3px; height: 3px;
+  background: radial-gradient(circle, rgba(224, 248, 252, 0.95), transparent 70%);
+  animation: heroSpray calc(2.4s + (var(--i) * 0.2s)) ease-out infinite;
+  animation-delay: calc(var(--i) * -0.3s);
+}
+@keyframes heroSpray {
+  0% { transform: translate3d(0, 8px, 0); opacity: 0; }
+  30% { opacity: 0.9; }
+  100% { transform: translate3d(6px, -80px, 0); opacity: 0; }
+}
+
+/* --- Voiles atmosphériques (jointures) --- */
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  will-change: opacity;
+}
+.hero__veil--dust {
+  background: radial-gradient(65% 55% at 50% 64%, rgba(158, 130, 88, 0.55), transparent 72%);
+}
+.hero__veil--bloom {
+  background: radial-gradient(70% 60% at 50% 52%, rgba(255, 222, 158, 0.5), rgba(47, 182, 196, 0.12) 45%, transparent 72%);
+  mix-blend-mode: screen;
+}
+
+/* Voile de lisibilité */
 .hero__scrim {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 9;
   pointer-events: none;
   background:
-    linear-gradient(to top, rgba(11, 20, 32, 0.9) 0%, rgba(11, 20, 32, 0.15) 45%, rgba(11, 20, 32, 0.55) 100%),
+    linear-gradient(to top, rgba(11, 20, 32, 0.9) 0%, rgba(11, 20, 32, 0.12) 45%, rgba(11, 20, 32, 0.55) 100%),
     radial-gradient(120% 85% at 50% 32%, transparent 42%, rgba(11, 20, 32, 0.5) 100%);
 }
 
-/* --- Poussière du terrassement (étape 3) --- */
-.hero__dust {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  opacity: 0;
-  will-change: opacity;
-}
-.hero__dust span {
-  position: absolute;
-  bottom: 22%;
-  left: calc(6% + (var(--i) * 6.3%));
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(214, 197, 160, 0.9), rgba(214, 197, 160, 0) 70%);
-  animation: heroDust calc(5s + (var(--i) * 0.4s)) linear infinite;
-  animation-delay: calc(var(--i) * -0.55s);
-}
-@keyframes heroDust {
-  0% { transform: translate3d(0, 20px, 0) scale(0.6); opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.5; }
-  100% { transform: translate3d(18px, -120px, 0) scale(1.3); opacity: 0; }
-}
-
-/* --- Accroche de départ --- */
+/* ============================================================================
+   CONTENU (au-dessus de la scène)
+   ============================================================================ */
 .hero__intro {
   position: absolute;
-  z-index: 6;
+  z-index: 12;
   inset: 0;
   display: flex;
   flex-direction: column;
@@ -122,10 +247,9 @@
   text-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Légendes narratives (une par étape, en fondu) --- */
 .hero__captions {
   position: absolute;
-  z-index: 6;
+  z-index: 12;
   left: var(--pad-x);
   right: var(--pad-x);
   bottom: clamp(9rem, 20vh, 13rem);
@@ -163,10 +287,9 @@
   margin-top: 0.7rem;
 }
 
-/* --- CTA final (mise en eau) --- */
 .hero__cta-wrap {
   position: absolute;
-  z-index: 7;
+  z-index: 13;
   left: var(--pad-x);
   bottom: clamp(3rem, 9vh, 5.5rem);
   will-change: transform, opacity;
@@ -186,16 +309,12 @@
   transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft);
 }
 .hero__cta svg { transition: transform 0.4s var(--ease-soft); }
-.hero__cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 50px -12px rgba(47, 182, 196, 0.85);
-}
+.hero__cta:hover { transform: translateY(-3px); box-shadow: 0 18px 50px -12px rgba(47, 182, 196, 0.85); }
 .hero__cta:hover svg { transform: translateX(4px); }
 
-/* --- Indicateur de défilement --- */
 .hero__scroll {
   position: absolute;
-  z-index: 6;
+  z-index: 12;
   bottom: clamp(1.5rem, 4vh, 3rem);
   left: 50%;
   transform: translateX(-50%);
@@ -233,14 +352,24 @@
   60%, 100% { transform: translateY(300%); }
 }
 
-/* --- Repli statique : accroche + CTA visibles, légendes masquées --- */
-.hero--static .hero__dust,
+/* --- Repli statique : image finale figée, accroche + CTA visibles --- */
+.hero--static .hero__plate--empty,
+.hero--static .hero__plate--dig,
+.hero--static .hero__plate--structure,
+.hero--static .hero__prop,
+.hero--static .hero__particles,
+.hero--static .hero__veil,
+.hero--static .hero__shimmer,
 .hero--static .hero__scroll,
 .hero--static .hero__caption:not(:last-child) { display: none; }
+.hero--static .hero__plate--water { clip-path: none !important; }
 .hero--static .hero__cta-wrap { opacity: 1 !important; }
 
+/* --- Mobile : allègements perf --- */
 @media (max-width: 760px) {
-  .hero__dust { display: none; } /* particules coûteuses sur mobile */
+  .hero__particles--dust,
+  .hero__particles--spray { display: none; }
+  .hero__caustic { animation: none; }
   .hero__captions { bottom: clamp(8rem, 22vh, 11rem); }
 }
 @media (max-width: 640px) {
@@ -248,5 +377,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__dust, .hero__scroll-line::after { animation: none; }
+  .hero__particles span,
+  .hero__caustic,
+  .hero__shimmer::after,
+  .hero__scroll-line::after { animation: none; }
 }

@@ -28,6 +28,12 @@ export const mediaRemote = {
   "/media/hero-construction/etape-4.jpg": `${CDN}/hf_20260719_114749_9e2ed19f-3f76-4906-8385-3fa09cda8564_min.webp`,
   "/media/hero-construction/etape-5.jpg": `${CDN}/hf_20260719_114754_d20b7893-9e79-4b02-b5a2-44a182601ece_min.webp`,
 
+  // Hero — éléments détourés (PNG transparents) + vidéo du terrassement
+  "/media/hero-construction/excavator.png": `${CDN}/hf_20260719_140208_6806b6b8-9df4-4416-8331-9aa64b51ed24.png`,
+  "/media/hero-construction/truck.png": `${CDN}/hf_20260719_140215_a2295be9-e99b-4f70-bab2-83d280100afc.png`,
+  "/media/hero-construction/workers.png": `${CDN}/hf_20260719_140233_8fa25988-95a3-46cd-a216-e6519d2a504c.png`,
+  "/media/hero-construction/digging.mp4": `${CDN}/hf_20260719_135943_f68e07c8-11a5-4e9f-bb0e-903503542f6e.mp4`,
+
   // Catalogue — images "avant" (même cadrage que le modèle "après")
   "/media/avant-apres/debordement-avant.jpg": `${CDN}/hf_20260719_114636_b401e6c9-bc5b-4b13-8615-cc3dc2eb1973_min.webp`,
   "/media/avant-apres/miroir-avant.jpg": `${CDN}/hf_20260719_114639_82820b8d-3988-42e2-8226-d88e56e45e87_min.webp`,

@@ -182,10 +182,17 @@ export const entreprise = {
   heroConstruction: [
     { id: "vide", image: "/media/hero-construction/etape-1.jpg" },
     { id: "equipe", image: "/media/hero-construction/etape-2.jpg" },
-    { id: "terrassement", image: "/media/hero-construction/etape-3.jpg" },
+    { id: "terrassement", image: "/media/hero-construction/etape-3.jpg", video: "/media/hero-construction/digging.mp4" },
     { id: "structure", image: "/media/hero-construction/etape-4.jpg" },
     { id: "eau", image: "/media/hero-construction/etape-5.jpg" },
   ],
+  //  Éléments détourés (PNG transparents) qui ENTRENT dans le cadre à l'étape
+  //  « arrivée » — c'est le mouvement, pas un fondu, qui donne vie à la scène.
+  heroProps: {
+    excavator: "/media/hero-construction/excavator.png",
+    truck: "/media/hero-construction/truck.png",
+    workers: "/media/hero-construction/workers.png",
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   //  PAGE NOTRE HISTOIRE — chronologie + savoir-faire
