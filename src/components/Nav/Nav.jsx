@@ -4,14 +4,15 @@ import { gsap } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
 import { usePageTransition } from "../../router/PageTransition.jsx";
+import { resolveMedia } from "../../config/mediaRemote.js";
 import LangSwitcher from "../LangSwitcher/LangSwitcher.jsx";
 import "./Nav.css";
 
 const LIENS = [
-  { key: "accueil", to: "/" },
-  { key: "histoire", to: "/notre-histoire" },
-  { key: "nosPiscines", to: "/nos-piscines" },
-  { key: "rendezVous", to: "/rendez-vous" },
+  { key: "accueil", to: "/", img: "/media/realisations/villa-eze.jpg" },
+  { key: "histoire", to: "/notre-histoire", img: "/media/histoire/artisan.jpg" },
+  { key: "nosPiscines", to: "/nos-piscines", img: "/media/realisations/saint-tropez.jpg" },
+  { key: "rendezVous", to: "/rendez-vous", img: "/media/realisations/cap-ferrat.jpg" },
 ];
 
 export default function Nav() {
@@ -20,8 +21,14 @@ export default function Nav() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hover, setHover] = useState(null); // index survolé (desktop)
   const overlayRef = useRef(null);
+  const revealRef = useRef(null);
   const linksRef = useRef([]);
+
+  // Image de fond active : lien survolé, sinon page courante
+  const currentIndex = LIENS.findIndex((l) => l.to === location.pathname);
+  const activeImg = hover != null ? hover : currentIndex >= 0 ? currentIndex : 0;
 
   // Fond de la barre au scroll
   useEffect(() => {
@@ -39,18 +46,27 @@ export default function Nav() {
     const lenis = window.__lenis;
 
     if (open) {
+      setHover(null);
       lenis?.stop();
       document.body.style.overflow = "hidden";
       gsap.set(overlay, { display: "flex", pointerEvents: "auto" });
       if (reduce) {
         gsap.set(overlay, { opacity: 1 });
+        gsap.set(revealRef.current, { yPercent: -120 });
         gsap.set(linksRef.current, { opacity: 1, y: 0 });
       } else {
-        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+        gsap.set(overlay, { opacity: 1 });
+        // Volet liquide turquoise : recouvre puis se retire vers le haut (révélation).
+        // -120% : le panneau ET sa goutte (::after, 15vh) sortent entièrement du cadre.
+        gsap.fromTo(
+          revealRef.current,
+          { yPercent: 0 },
+          { yPercent: -120, duration: 0.85, ease: "power3.inOut" }
+        );
         gsap.fromTo(
           linksRef.current,
           { opacity: 0, y: 34 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.06, delay: 0.15 }
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.07, delay: 0.42 }
         );
       }
     } else {
@@ -109,12 +125,28 @@ export default function Nav() {
 
       {/* Overlay plein écran */}
       <div className="nav__overlay" ref={overlayRef} aria-hidden={!open}>
+        {/* Base aquatique (visible derrière les photos) */}
         <div className="nav__overlay-bg" aria-hidden="true">
           <span className="nav__wave nav__wave--1" />
           <span className="nav__wave nav__wave--2" />
         </div>
 
-        <nav className="nav__menu">
+        {/* Photos illustrant chaque lien (fondu enchaîné au survol) */}
+        <div className="nav__images" aria-hidden="true">
+          {LIENS.map((lien, i) => (
+            <div
+              key={lien.to}
+              className={`nav__img ${i === activeImg ? "is-active" : ""}`}
+              style={{ backgroundImage: `url(${resolveMedia(lien.img)})` }}
+            />
+          ))}
+        </div>
+        <div className="nav__scrim" aria-hidden="true" />
+
+        {/* Volet liquide de révélation */}
+        <span className="nav__reveal" ref={revealRef} aria-hidden="true" />
+
+        <nav className="nav__menu" onMouseLeave={() => setHover(null)}>
           <ul>
             {LIENS.map((lien, i) => (
               <li key={lien.to}>
@@ -122,9 +154,12 @@ export default function Nav() {
                   ref={(el) => (linksRef.current[i] = el)}
                   className={`nav__link ${location.pathname === lien.to ? "is-current" : ""} ${lien.to === "/rendez-vous" ? "nav__link--cta" : ""}`}
                   onClick={() => goTo(lien.to)}
+                  onMouseEnter={() => setHover(i)}
+                  onFocus={() => setHover(i)}
                 >
+                  <span className="nav__thumb" style={{ backgroundImage: `url(${resolveMedia(lien.img)})` }} aria-hidden="true" />
                   <span className="nav__link-num">0{i + 1}</span>
-                  {t(`nav.${lien.key}`)}
+                  <span className="nav__link-label">{t(`nav.${lien.key}`)}</span>
                 </button>
               </li>
             ))}
