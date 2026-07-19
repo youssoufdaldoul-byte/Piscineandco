@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "../../lib/gsap.js";
+import { gsap, ScrollTrigger } from "../../lib/gsap.js";
 import { useLangue } from "../../i18n/index.jsx";
 import { entreprise } from "../../config/entreprise.js";
 import { resolveMedia } from "../../config/mediaRemote.js";
@@ -79,15 +79,20 @@ export default function Hero() {
       gsap.set(ctaRef.current, { opacity: 0, y: 20, pointerEvents: "none" });
       gsap.set(caps.slice(1), { opacity: 0, y: 24 });
 
+      // La distance de scroll de la séquence est définie ICI (end += ...),
+      // et non par une hauteur CSS sur .hero — sinon l'espace serait réservé
+      // deux fois (hauteur + pin-spacer) et la section suivante remonterait
+      // sur l'animation épinglée.
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: rootRef.current,
           start: "top top",
-          end: "bottom top",
+          end: () => "+=" + window.innerHeight * (desktop ? 5.2 : 3.2),
           scrub: 1,
           pin: stageRef.current,
           pinSpacing: true,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -160,7 +165,16 @@ export default function Hero() {
       tl.to(ctaRef.current, { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.06 }, 0.9);
     }, rootRef);
 
-    return () => ctx.revert();
+    // Recalcule les mesures du pin une fois tous les médias chargés (#5) —
+    // une mise en page mesurée avant le chargement des médias fausse le pin.
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") ScrollTrigger.refresh();
+    else window.addEventListener("load", onLoad);
+
+    return () => {
+      window.removeEventListener("load", onLoad);
+      ctx.revert();
+    };
   }, []);
 
   return (

@@ -7,11 +7,10 @@
 
 .hero {
   position: relative;
-  height: 620vh;
   background: var(--c-fond);
-}
-@media (max-width: 760px) {
-  .hero { height: 420vh; }
+  /* Pas de hauteur explicite : la distance de scroll est réservée par le
+     pin-spacer de ScrollTrigger (end += ...). Une hauteur ici la réserverait
+     une 2e fois → la section suivante remonterait sur l'animation. */
 }
 .hero--static {
   height: 100vh;
