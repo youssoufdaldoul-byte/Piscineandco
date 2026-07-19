@@ -202,6 +202,11 @@ export default function Hero() {
               <div className="hero__caustic" />
             </div>
           </div>
+          {/* Étalonnage unifié + lumière directionnelle (même caméra) */}
+          <div className="hero__grade" aria-hidden="true" />
+          {/* Netteté focale : périphérie adoucie, bassin net */}
+          <div className="hero__dof" aria-hidden="true" />
+
           {/* Ligne de reflet de surface (monte avec l'eau) */}
           <div className="hero__shimmer" ref={shimmerRef} aria-hidden="true" />
 
