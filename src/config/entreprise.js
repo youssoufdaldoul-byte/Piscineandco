@@ -231,6 +231,13 @@ export const entreprise = {
     heroPoster: "/media/hero/hero-poster.jpg", // image affichée avant chargement
     histoireImage: "/media/histoire/artisan.jpg", // photo artisan / équipe
     ogImage: "/media/og-image.jpg", // aperçu réseaux sociaux
+    // Héros scrubbé au scroll — fichiers LOCAUX ré-encodés (keyframe/frame).
+    // Déposez-les dans public/media/hero-scrub/ (voir commandes ffmpeg).
+    heroScrub: {
+      video1920: "/media/hero-scrub/hero-1920.mp4", // desktop
+      video1280: "/media/hero-scrub/hero-1280.mp4", // mobile
+      poster: "/media/hero-scrub/hero-poster.jpg", // 1re image
+    },
   },
 
   // ─────────────────────────────────────────────────────────────────────────
