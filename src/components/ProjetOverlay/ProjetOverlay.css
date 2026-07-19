@@ -1,0 +1,242 @@
+/* ============================================================================
+   SUPERPOSITION PROJET (overlay plein écran + volet liquide)
+   ============================================================================ */
+.pov {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 3vw, 2rem);
+}
+.pov__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 17, 0.78);
+  backdrop-filter: blur(6px);
+  animation: povFade 0.5s var(--ease-soft) both;
+}
+
+/* Volet liquide turquoise qui balaie à l'ouverture */
+.pov__wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(120deg, var(--c-accent), #1a6f7e 60%, var(--c-fond));
+  transform-origin: left center;
+  animation: povWipe 0.85s var(--ease-water) both;
+}
+@keyframes povWipe {
+  0% { transform: scaleX(0); opacity: 1; }
+  45% { transform: scaleX(1); opacity: 1; }
+  55% { transform: scaleX(1); transform-origin: right center; }
+  100% { transform: scaleX(0); transform-origin: right center; opacity: 1; }
+}
+@keyframes povFade { from { opacity: 0; } to { opacity: 1; } }
+
+.pov__dialog {
+  position: relative;
+  z-index: 3;
+  width: min(1100px, 100%);
+  max-height: 94vh;
+  max-height: 94svh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--c-fond);
+  border: 1px solid var(--c-ligne);
+  border-radius: var(--radius);
+  box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.8);
+  animation: povRise 0.6s var(--ease-soft) 0.25s both;
+}
+@keyframes povRise {
+  from { opacity: 0; transform: translateY(26px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Barre supérieure */
+.pov__bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  background: linear-gradient(to bottom, var(--c-fond) 60%, transparent);
+}
+.pov__counter {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-texte-doux);
+}
+.pov__counter strong { color: var(--c-or); font-weight: 600; }
+.pov__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--c-texte);
+  border: 1px solid var(--c-ligne);
+  background: var(--c-verre);
+  transition: background 0.3s, transform 0.3s var(--ease-soft), border-color 0.3s;
+}
+.pov__close:hover { background: var(--c-accent); color: var(--c-fond); transform: rotate(90deg); border-color: var(--c-accent); }
+
+/* Contenu */
+.pov__panel {
+  padding: 0 clamp(1rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.5rem);
+  animation: povPanel 0.55s var(--ease-soft) 0.35s both;
+}
+@keyframes povPanel { from { opacity: 0; } to { opacity: 1; } }
+
+.pov__head { margin: 1.6rem 0 1.4rem; }
+.pov__eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-or);
+}
+.pov__titre {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.02;
+  color: var(--c-texte);
+  margin-top: 0.6rem;
+}
+
+.pov__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 0.5rem;
+}
+.pov__sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--c-ligne);
+}
+.pov__para {
+  color: var(--c-texte-doux);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.pov__para:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.1rem;
+  float: left;
+  line-height: 0.8;
+  padding: 0.1rem 0.6rem 0 0;
+  color: var(--c-or);
+}
+
+.pov__carac {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.8rem;
+}
+.pov__carac li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--c-texte-doux);
+  font-size: 0.96rem;
+}
+.pov__carac li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 10px rgba(47, 182, 196, 0.6);
+}
+.pov__specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--c-ligne);
+}
+.pov__specs > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+.pov__specs dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+}
+.pov__specs dd {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--c-texte);
+  text-align: right;
+}
+
+.pov__cta-row {
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+  display: flex;
+  justify-content: center;
+}
+.pov__cta { font-size: 1rem; padding-inline: 2.2rem; }
+
+/* Navigation préc./suiv. */
+.pov__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 210;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: var(--c-texte);
+  background: rgba(7, 13, 22, 0.65);
+  border: 1px solid var(--c-ligne);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s, transform 0.3s var(--ease-soft), color 0.3s;
+}
+.pov__nav:hover { background: var(--c-accent); color: var(--c-fond); }
+.pov__nav--prev { left: clamp(0.5rem, 2vw, 1.5rem); }
+.pov__nav--next { right: clamp(0.5rem, 2vw, 1.5rem); }
+.pov__nav--prev:hover { transform: translateY(-50%) translateX(-3px); }
+.pov__nav--next:hover { transform: translateY(-50%) translateX(3px); }
+
+@media (max-width: 820px) {
+  .pov__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .pov { padding: 0; }
+  .pov__dialog { max-height: 100vh; max-height: 100svh; border-radius: 0; border: none; width: 100%; }
+  .pov__nav {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+    width: 46px;
+    height: 46px;
+  }
+  .pov__nav--prev { left: 1rem; }
+  .pov__nav--next { right: 1rem; }
+  .pov__nav--prev:hover, .pov__nav--next:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pov__wipe { display: none; }
+  .pov__scrim, .pov__dialog, .pov__panel { animation: none; }
+}

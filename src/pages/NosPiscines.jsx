@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { useLangue } from "../i18n/index.jsx";
 import { entreprise } from "../config/entreprise.js";
+import { resolveMedia } from "../config/mediaRemote.js";
 import PageHero from "../components/PageHero/PageHero.jsx";
-import MediaImage from "../components/MediaImage/MediaImage.jsx";
-import MaskReveal from "../components/MaskReveal/MaskReveal.jsx";
 import Reveal from "../components/Reveal/Reveal.jsx";
-import TransitionLink from "../router/TransitionLink.jsx";
+import ProjetOverlay from "../components/ProjetOverlay/ProjetOverlay.jsx";
 import "./nos-piscines.css";
 import "./page.css";
 
@@ -20,49 +20,41 @@ function usePrix() {
   };
 }
 
-function Modele({ m, index }) {
+function Carte({ m, index, onOpen }) {
   const { t } = useLangue();
   const prix = usePrix();
   const num = String(index + 1).padStart(2, "0");
+  const nom = t(`piscinesPage.modeles.${m.id}.nom`);
 
   return (
-    <section className={`modele ${index % 2 === 1 ? "modele--alt" : ""}`}>
-      <div className="modele__media">
-        <MediaImage src={m.image} alt={t(`piscinesPage.modeles.${m.id}.nom`)} ratio="large" effects={false} kenburns eager={index === 0} />
-      </div>
-      <div className="modele__scrim" />
-      <div className="container modele__content">
-        <span className="modele__num">{num}</span>
-        <MaskReveal as="h2" className="modele__nom">
-          {t(`piscinesPage.modeles.${m.id}.nom`)}
-        </MaskReveal>
-        <Reveal as="p" className="modele__desc" delay={0.1}>
-          {t(`piscinesPage.modeles.${m.id}.desc`)}
-        </Reveal>
-
-        <Reveal className="modele__specs" delay={0.15}>
-          <div className="spec">
-            <span className="spec__label">{t("piscinesPage.specs.dimensions")}</span>
-            <span className="spec__val">{m.dims}</span>
-          </div>
-          <div className="spec">
-            <span className="spec__label">{t("piscinesPage.specs.profondeur")}</span>
-            <span className="spec__val">{m.profondeur}</span>
-          </div>
-          <div className="spec">
-            <span className="spec__label">{t("piscinesPage.specs.delai")}</span>
-            <span className="spec__val">{m.delai} {t("piscinesPage.specs.delaiUnite")}</span>
-          </div>
-        </Reveal>
-
-        <Reveal className="modele__foot" delay={0.2}>
-          <span className="modele__prix">{prix(m.prixMin)}</span>
-          <TransitionLink to={`/rendez-vous?modele=${m.id}`} className="btn btn--solid">
-            {t("piscinesPage.demander")}
-          </TransitionLink>
-        </Reveal>
-      </div>
-    </section>
+    <Reveal as="li" className="pcard" delay={(index % 3) * 0.08} y={30}>
+      <button className="pcard__btn" onClick={() => onOpen(index)} aria-label={`${t("piscinesPage.voirProjet")} — ${nom}`}>
+        <span className="pcard__media">
+          <img
+            src={resolveMedia(m.image)}
+            alt={nom}
+            loading={index < 3 ? "eager" : "lazy"}
+            draggable="false"
+          />
+          <span className="pcard__scrim" />
+          <span className="pcard__num">{num}</span>
+          <span className="pcard__hover">{t("piscinesPage.voirProjet")}</span>
+        </span>
+        <span className="pcard__info">
+          <span className="pcard__nom">{nom}</span>
+          <span className="pcard__desc">{t(`piscinesPage.modeles.${m.id}.desc`)}</span>
+          <span className="pcard__foot">
+            <span className="pcard__prix">{prix(m.prixMin)}</span>
+            <span className="pcard__go">
+              {t("piscinesPage.voirProjet")}
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </span>
+        </span>
+      </button>
+    </Reveal>
   );
 }
 
@@ -107,6 +99,8 @@ function Comparatif() {
 
 export default function NosPiscines() {
   const { t } = useLangue();
+  const [openIndex, setOpenIndex] = useState(null);
+
   return (
     <article className="page">
       <PageHero
@@ -116,12 +110,24 @@ export default function NosPiscines() {
         image="/media/realisations/villa-eze.jpg"
         alt={t("pages.piscines.titre")}
       />
-      <div className="modeles">
-        {entreprise.piscines.modeles.map((m, i) => (
-          <Modele key={m.id} m={m} index={i} />
-        ))}
-      </div>
+
+      <section className="section pcatalogue">
+        <div className="container">
+          <header className="pcatalogue__head">
+            <Reveal as="p" className="eyebrow">{t("piscinesPage.comparatifEyebrow")}</Reveal>
+            <Reveal as="h2" className="pcatalogue__title" delay={0.05}>{t("pages.piscines.titre")}</Reveal>
+          </header>
+          <ul className="pcards">
+            {entreprise.piscines.modeles.map((m, i) => (
+              <Carte key={m.id} m={m} index={i} onOpen={setOpenIndex} />
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <Comparatif />
+
+      <ProjetOverlay index={openIndex} onClose={() => setOpenIndex(null)} onNavigate={setOpenIndex} />
     </article>
   );
 }

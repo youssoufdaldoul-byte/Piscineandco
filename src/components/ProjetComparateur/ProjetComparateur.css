@@ -1,0 +1,118 @@
+/* ============================================================================
+   COMPARATEUR AVANT / APRÈS
+   ============================================================================ */
+.cmp {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: ew-resize;
+  background: var(--c-fond);
+  user-select: none;
+  touch-action: pan-y; /* le glissement horizontal pilote la poignée */
+  box-shadow: var(--shadow-card);
+}
+.cmp__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.cmp__img--avant {
+  will-change: clip-path;
+  /* léger contraste pour distinguer l'état "avant" (chantier) */
+  filter: saturate(0.92) brightness(0.98);
+}
+
+/* Étiquettes de coin */
+.cmp__tag {
+  position: absolute;
+  top: 1rem;
+  z-index: 3;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-texte);
+  background: rgba(7, 13, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.cmp__tag--left { left: 1rem; }
+.cmp__tag--right { right: 1rem; color: var(--c-accent); border-color: rgba(47, 182, 196, 0.4); }
+
+/* Poignée */
+.cmp__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  width: 0;
+  transform: translateX(-1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+.cmp__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
+}
+.cmp__grip {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--c-fond);
+  background: var(--c-accent);
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s var(--ease-soft), box-shadow 0.25s;
+}
+.cmp__handle:hover .cmp__grip,
+.cmp__handle:focus-visible .cmp__grip {
+  transform: scale(1.12);
+}
+.cmp__handle:focus-visible .cmp__grip {
+  box-shadow: 0 0 0 4px rgba(47, 182, 196, 0.35), 0 6px 20px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Indice */
+.cmp__hint {
+  position: absolute;
+  z-index: 3;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--c-texte);
+  background: rgba(7, 13, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-soft);
+}
+.cmp__hint.is-hidden { opacity: 0; }
+
+@media (max-width: 600px) {
+  .cmp { aspect-ratio: 4 / 3; }
+  .cmp__grip { width: 40px; height: 40px; }
+  .cmp__tag { font-size: 0.62rem; padding: 0.35rem 0.7rem; }
+}
