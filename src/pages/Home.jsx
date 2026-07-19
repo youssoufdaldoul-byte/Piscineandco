@@ -1,4 +1,4 @@
-import Hero from "../sections/Hero/Hero.jsx";
+import Hero from "../sections/Hero/HeroScrub.jsx";
 import Experience from "../sections/Experience/Experience.jsx";
 import Realisations from "../sections/Realisations/Realisations.jsx";
 import Teaser from "../sections/Teaser/Teaser.jsx";

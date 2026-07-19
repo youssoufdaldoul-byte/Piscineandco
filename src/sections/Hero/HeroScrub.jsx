@@ -22,6 +22,10 @@ export default function HeroScrub() {
   const { t } = useLangue();
   const src = entreprise.medias.heroScrub;
   const etapes = t("hero.etapes") || [];
+  // La source est choisie ici (l'attribut media sur <source> n'est pas fiable
+  // pour <video>) : version mobile allégée sous 760px, sinon desktop.
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 760px)").matches;
+  const videoSrc = resolveMedia(isMobile ? src.video1280 : src.video1920);
 
   const rootRef = useRef(null);
   const stageRef = useRef(null);
@@ -50,6 +54,11 @@ export default function HeroScrub() {
     gsap.fromTo(caps[0], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", delay: 0.5 });
 
     if (rm) return; // reduced-motion : poster figé, pas de scrub
+
+    // États initiaux posés TOUT DE SUITE : même si la vidéo ne se charge pas,
+    // la mise en page reste propre (pas de légendes empilées, CTA masqué).
+    gsap.set(caps.slice(1), { opacity: 0, y: 24 });
+    gsap.set(ctaRef.current, { opacity: 0, y: 20, pointerEvents: "none" });
 
     const wire = () => {
       const duration = video?.duration;
@@ -90,7 +99,6 @@ export default function HeroScrub() {
         const windows = [
           [0.0, 0.12], [0.14, 0.30], [0.32, 0.52], [0.54, 0.74], [0.78, 1.0],
         ];
-        gsap.set(caps.slice(1), { opacity: 0, y: 24 });
         caps.forEach((cap, i) => {
           if (!cap) return;
           const [inAt, outAt] = windows[i];
@@ -129,6 +137,7 @@ export default function HeroScrub() {
         <video
           className="heros__video"
           ref={videoRef}
+          src={videoSrc}
           poster={resolveMedia(src.poster)}
           muted
           playsInline
@@ -136,10 +145,7 @@ export default function HeroScrub() {
           disablePictureInPicture
           disableRemotePlayback
           aria-hidden="true"
-        >
-          <source src={resolveMedia(src.video1280)} media="(max-width: 760px)" type="video/mp4" />
-          <source src={resolveMedia(src.video1920)} media="(min-width: 761px)" type="video/mp4" />
-        </video>
+        />
 
         <div className="heros__scrim" aria-hidden="true" />
 

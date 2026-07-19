@@ -34,6 +34,14 @@ export const mediaRemote = {
   "/media/hero-construction/workers.png": `${CDN}/hf_20260719_140233_8fa25988-95a3-46cd-a216-e6519d2a504c.png`,
   "/media/hero-construction/digging.mp4": `${CDN}/hf_20260719_135943_f68e07c8-11a5-4e9f-bb0e-903503542f6e.mp4`,
 
+  // Hero scrubbé au scroll — time-lapse complet (1080p, upscalé).
+  // ⚠️ Clip généré NON ré-encodé keyframe/frame : scrub potentiellement un peu
+  // saccadé. Pour une fluidité parfaite, remplacer par les fichiers ré-encodés
+  // locaux (public/media/hero-scrub/) et retirer ces 2 lignes.
+  "/media/hero-scrub/hero-1920.mp4": `${CDN}/hf_20260719_232014_457c2481-cc80-445a-882e-9f04822b8c99.mp4`,
+  "/media/hero-scrub/hero-1280.mp4": `${CDN}/hf_20260719_232014_457c2481-cc80-445a-882e-9f04822b8c99.mp4`,
+  "/media/hero-scrub/hero-poster.jpg": `${CDN}/hf_20260719_114556_4148fe98-27d4-4df5-8ce6-2686f1084712_min.webp`,
+
   // Catalogue — images "avant" (même cadrage que le modèle "après")
   "/media/avant-apres/debordement-avant.jpg": `${CDN}/hf_20260719_114636_b401e6c9-bc5b-4b13-8615-cc3dc2eb1973_min.webp`,
   "/media/avant-apres/miroir-avant.jpg": `${CDN}/hf_20260719_114639_82820b8d-3988-42e2-8226-d88e56e45e87_min.webp`,
