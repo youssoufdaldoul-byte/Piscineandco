@@ -81,9 +81,10 @@ export default function HeroScrub() {
           scrollTrigger: {
             trigger: rootRef.current,
             start: "top top",
-            // Distance de pin réduite de moitié (5.2→2.6 / 3.2→1.6) : les mêmes
-            // 10 s de vidéo sont consommées sur 2× moins de scroll → ressenti 2× plus rapide.
-            end: () => "+=" + window.innerHeight * (desktop ? 2.6 : 1.6),
+            // Distance de pin la plus courte possible tout en gardant les
+            // légendes lisibles : ~1.3 vh desktop / 0.9 vh mobile → la séquence
+            // défile très vite (plancher fixé par la lecture des 5 légendes).
+            end: () => "+=" + window.innerHeight * (desktop ? 1.3 : 0.9),
             scrub: true, // verrou dur 1:1 (pas de rattrapage temporisé)
             pin: stageRef.current,
             pinSpacing: true,
