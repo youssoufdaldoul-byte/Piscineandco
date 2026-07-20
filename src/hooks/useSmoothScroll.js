@@ -14,8 +14,9 @@ export function useSmoothScroll() {
     if (reduceMotion) return; // scroll natif, pas de lissage
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // lerp par frame (≈0.1) au lieu d'une durée d'inertie de 1.15 s :
+      // le scroll s'arrête quasi instantanément → verrou 1:1 pour le hero scrubbé.
+      lerp: 0.1,
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,

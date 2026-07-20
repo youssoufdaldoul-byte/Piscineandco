@@ -64,16 +64,16 @@ export default function HeroScrub() {
       const duration = video?.duration;
       if (!duration || !isFinite(duration)) return;
 
-      // Boucle de lissage : currentTime glisse vers la cible (facteur ~0.15)
-      const lerp = () => {
-        const cur = video.currentTime;
-        const diff = targetTime - cur;
-        if (Math.abs(diff) > 0.001) {
-          try { video.currentTime = cur + diff * 0.15; } catch (_) { /* seek en cours */ }
+      // Verrou 1:1 : on place currentTime DIRECTEMENT sur la cible (aucun
+      // lissage — Lenis est désormais la seule source d'inertie). On respecte
+      // l'état "seeking" pour ne pas saturer le décodeur pendant un scroll rapide.
+      const applySeek = () => {
+        if (!video.seeking && Math.abs(video.currentTime - targetTime) > 0.01) {
+          try { video.currentTime = targetTime; } catch (_) { /* seek en cours */ }
         }
-        raf = requestAnimationFrame(lerp);
+        raf = requestAnimationFrame(applySeek);
       };
-      raf = requestAnimationFrame(lerp);
+      raf = requestAnimationFrame(applySeek);
 
       ctx = gsap.context(() => {
         const tl = gsap.timeline({
@@ -84,7 +84,7 @@ export default function HeroScrub() {
             // Distance de pin réduite de moitié (5.2→2.6 / 3.2→1.6) : les mêmes
             // 10 s de vidéo sont consommées sur 2× moins de scroll → ressenti 2× plus rapide.
             end: () => "+=" + window.innerHeight * (desktop ? 2.6 : 1.6),
-            scrub: 1,
+            scrub: true, // verrou dur 1:1 (pas de rattrapage temporisé)
             pin: stageRef.current,
             pinSpacing: true,
             invalidateOnRefresh: true,
