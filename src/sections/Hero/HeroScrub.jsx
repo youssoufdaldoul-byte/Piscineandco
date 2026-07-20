@@ -81,7 +81,9 @@ export default function HeroScrub() {
           scrollTrigger: {
             trigger: rootRef.current,
             start: "top top",
-            end: () => "+=" + window.innerHeight * (desktop ? 5.2 : 3.2),
+            // Distance de pin réduite de moitié (5.2→2.6 / 3.2→1.6) : les mêmes
+            // 10 s de vidéo sont consommées sur 2× moins de scroll → ressenti 2× plus rapide.
+            end: () => "+=" + window.innerHeight * (desktop ? 2.6 : 1.6),
             scrub: 1,
             pin: stageRef.current,
             pinSpacing: true,
