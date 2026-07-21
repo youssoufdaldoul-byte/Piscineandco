@@ -23,6 +23,23 @@ function useRdvForm() {
   });
   const [errors, setErrors] = useState({});
   const [statut, setStatut] = useState("idle"); // idle | sending | success | error
+  const [quizData, setQuizData] = useState(null);
+
+  // Pré-remplissage depuis le quiz « Quel bassin ? » (arrivée via ?bassin=…) :
+  // on récupère le récapitulatif complet des réponses pour l'inclure à l'envoi.
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("azur_quiz");
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      setQuizData(d);
+      setValues((v) => ({
+        ...v,
+        typeProjet: v.typeProjet || "construction",
+        message: v.message || `${t("rdvPage.quizPrefill")} ${d.bassinNom}.`,
+      }));
+    } catch (_) { /* stockage indisponible */ }
+  }, []);
 
   const set = (name, value) => {
     setValues((v) => ({ ...v, [name]: value }));
@@ -45,7 +62,15 @@ function useRdvForm() {
     const endpointPret = entreprise.formulaire.endpoint && !entreprise.formulaire.endpoint.includes("VOTRE_ID");
     setStatut("sending");
 
-    const payload = { ...values };
+    const payload = {
+      ...values,
+      ...(quizData
+        ? {
+            bassinRecommande: quizData.bassinNom,
+            ...Object.fromEntries(Object.entries(quizData.reponses || {}).map(([k, v]) => [`Quiz — ${k}`, v])),
+          }
+        : {}),
+    };
     if (!endpointPret) {
       setTimeout(() => setStatut("success"), 900);
       return;

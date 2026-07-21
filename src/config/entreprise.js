@@ -287,6 +287,17 @@ export const entreprise = {
         nage: { couloir: 4 },
       },
     },
+
+    // Présentation par type (Phase 3). awaiting:true = visuel dédié en cours de
+    // production (forme libre & plage immergée) → l'UI marque le créneau.
+    bassinsInfo: {
+      debordement: { image: "/media/realisations/saint-tropez.jpg", photos: ["/media/realisations/saint-tropez.jpg", "/media/realisations/villa-eze.jpg"], budget: "65 000 – 120 000 €", entretien: "modere", delai: "12 – 16" },
+      couloir: { image: "/media/realisations/monaco.jpg", photos: ["/media/realisations/monaco.jpg", "/media/realisations/cannes-nuit.jpg"], budget: "45 000 – 80 000 €", entretien: "modere", delai: "10 – 14" },
+      rectangle: { image: "/media/realisations/mougins.jpg", photos: ["/media/realisations/mougins.jpg", "/media/realisations/menton.jpg"], budget: "35 000 – 70 000 €", entretien: "faible", delai: "8 – 12" },
+      mini: { image: "/media/services/spa.jpg", photos: ["/media/services/spa.jpg"], budget: "18 000 – 40 000 €", entretien: "faible", delai: "3 – 6" },
+      formelibre: { image: "/media/quiz/formelibre.jpg", photos: ["/media/quiz/formelibre.jpg"], budget: "50 000 – 95 000 €", entretien: "modere", delai: "12 – 16", awaiting: true },
+      plage: { image: "/media/quiz/plage.jpg", photos: ["/media/quiz/plage.jpg"], budget: "55 000 – 100 000 €", entretien: "modere", delai: "12 – 18", awaiting: true },
+    },
   },
 
   medias: {
