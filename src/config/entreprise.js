@@ -226,6 +226,21 @@ export const entreprise = {
   //  MÉDIAS PRINCIPAUX (héros, histoire…)
   //  Fournir vos fichiers dans /public/media/. Placeholders en attendant.
   // ─────────────────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────────────────────
+  //  QUIZ « QUEL BASSIN ? » — structure des questions (Phase 1).
+  //  Le scoring pondéré et les types de bassin recommandés viennent en Phase 2.
+  // ─────────────────────────────────────────────────────────────────────────
+  quiz: {
+    questions: [
+      { id: "usage", options: ["detente", "sport", "recevoir", "vue"] },
+      { id: "terrain", options: ["plat", "pente", "petit", "vuevalu"] },
+      { id: "espace", options: ["petit30", "moyen", "grand", "inconnu"] },
+      { id: "priorite", options: ["esthetique", "entretien", "budget", "durabilite"] },
+      { id: "delai", options: ["asap", "mois", "saison", "renseigne"] },
+      { id: "envies", multi: true, options: ["eclairage", "spa", "volet", "chauffage", "nage"] },
+    ],
+  },
+
   medias: {
     heroVideo: "/media/hero/hero.mp4", // vidéo cinématique 16:9
     heroPoster: "/media/hero/hero-poster.jpg", // image affichée avant chargement

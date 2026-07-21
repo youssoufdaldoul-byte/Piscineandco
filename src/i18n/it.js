@@ -5,6 +5,7 @@ export default {
     realisations: "Realizzazioni",
     histoire: "La nostra storia",
     nosPiscines: "Le nostre piscine",
+    quelBassin: "Quale piscina?",
     rendezVous: "Appuntamento",
     avis: "Recensioni",
     processus: "Il processo",
@@ -12,6 +13,81 @@ export default {
     menu: "Menu",
     fermer: "Chiudi",
     langue: "Lingua",
+  },
+
+  quizPage: {
+    eyebrow: "Il quiz",
+    titre: "Quale piscina fa per te?",
+    sousTitre: "Cinque domande. Una raccomandazione su misura.",
+    commencer: "Inizia",
+    dureeIndice: "2 minuti, non di più",
+    question: "Domanda",
+    sur: "di",
+    retour: "Indietro",
+    suivant: "Avanti",
+    passer: "Salta questo passaggio",
+    multiIndice: "Sono possibili più scelte",
+    recapTitre: "Perfetto.",
+    recapSousTitre: "La tua raccomandazione personalizzata arriva al passo successivo.",
+    recapRappel: "Le tue risposte",
+    refaire: "Rifai il quiz",
+    questions: {
+      usage: {
+        titre: "La tua piscina sarà soprattutto per…",
+        options: {
+          detente: { label: "Rilassarsi in famiglia", detail: "Bagni dolci e momenti condivisi, in sicurezza." },
+          sport: { label: "Nuotare e fare sport", detail: "Vasche serie, ogni mattina." },
+          recevoir: { label: "Ricevere e godersi l'estate", detail: "Aperitivi in riva all'acqua, grandi tavolate." },
+          vue: { label: "Valorizzare la vista", detail: "Fare dell'orizzonte il cuore della scena." },
+        },
+      },
+      terrain: {
+        titre: "Com'è il tuo terreno?",
+        options: {
+          plat: { label: "Piatto e libero", detail: "Terreno ideale: quasi tutto è possibile." },
+          pente: { label: "In pendenza o a terrazze", detail: "Un dislivello da sfruttare, non da subire." },
+          petit: { label: "Spazio piccolo", detail: "Ogni metro conta." },
+          vuevalu: { label: "Con una vista da valorizzare", detail: "Mare, colline o giardino da inquadrare." },
+        },
+      },
+      espace: {
+        titre: "Di quanto spazio disponi?",
+        options: {
+          petit30: { label: "Meno di 30 m²", detail: "Compatta, urbana, intelligente." },
+          moyen: { label: "Da 30 a 60 m²", detail: "La superficie più comune." },
+          grand: { label: "Più di 60 m²", detail: "Ampiezza per vedere in grande." },
+          inconnu: { label: "Non lo so ancora", detail: "Stimeremo insieme, sul posto." },
+        },
+      },
+      priorite: {
+        titre: "Cosa conta di più per te?",
+        options: {
+          esthetique: { label: "L'estetica", detail: "La bellezza prima di tutto." },
+          entretien: { label: "La facilità di manutenzione", detail: "Goderla, senza pensarci." },
+          budget: { label: "Il budget controllato", detail: "Un bel progetto, ben definito." },
+          durabilite: { label: "La durabilità", detail: "Costruire per decenni." },
+        },
+      },
+      delai: {
+        titre: "Quando ti immagini tutto questo?",
+        options: {
+          asap: { label: "Il prima possibile", detail: "La voglia c'è, adesso." },
+          mois: { label: "Nei prossimi mesi", detail: "Il tempo di prepararsi bene." },
+          saison: { label: "La prossima stagione", detail: "Pronti per la prossima estate." },
+          renseigne: { label: "Mi sto informando", detail: "Ancora allo stadio delle idee." },
+        },
+      },
+      envies: {
+        titre: "Un desiderio particolare?",
+        options: {
+          eclairage: { label: "Illuminazione", detail: "Notti che si accendono." },
+          spa: { label: "Spa", detail: "Un angolo benessere, getti e calore." },
+          volet: { label: "Copertura automatica", detail: "Sicurezza e acqua più pulita." },
+          chauffage: { label: "Riscaldamento", detail: "Stagione di balneazione più lunga." },
+          nage: { label: "Nuoto controcorrente", detail: "Nuotare sul posto, senza fine." },
+        },
+      },
+    },
   },
 
   pages: {

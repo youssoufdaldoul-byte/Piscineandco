@@ -1,0 +1,370 @@
+/* ============================================================================
+   QUIZ « QUEL BASSIN ? » — expérience plein écran, une question à la fois.
+   Le fond global (Ambiance) transparaît : la section reste transparente.
+   ============================================================================ */
+.qz {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(6rem, 12vh, 8rem) var(--pad-x) clamp(3rem, 8vh, 5rem);
+}
+
+/* Voile de transition (balaye vers le haut) */
+.qz__wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  pointer-events: none;
+  background: linear-gradient(160deg, var(--c-accent), #10505c 68%, #0c3b45);
+  will-change: transform;
+}
+.qz__wipe::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14vh;
+  background: #0c3b45;
+  border-radius: 0 0 55% 55% / 0 0 100% 100%;
+}
+
+/* ── Jauge « niveau d'eau » ── */
+.qz__gauge {
+  position: fixed;
+  left: clamp(1rem, 3vw, 2.4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  pointer-events: none;
+}
+.qz__gauge-tube {
+  position: relative;
+  width: 8px;
+  height: clamp(160px, 40vh, 300px);
+  border-radius: 999px;
+  background: rgba(242, 246, 247, 0.1);
+  border: 1px solid var(--c-ligne);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.qz__gauge-fill {
+  position: relative;
+  width: 100%;
+  height: var(--p, 6%);
+  background: linear-gradient(to top, var(--c-accent-2, #1a7a9e), var(--c-accent));
+  border-radius: 999px;
+  transition: height 0.7s var(--ease-water, cubic-bezier(0.4, 0, 0.2, 1));
+  box-shadow: 0 0 14px rgba(47, 182, 196, 0.6);
+}
+.qz__gauge-wave {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-texte);
+  opacity: 0.85;
+  animation: qzBob 2.4s ease-in-out infinite;
+}
+@keyframes qzBob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -2px); } }
+.qz__gauge-label {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--c-texte);
+}
+.qz__gauge-label i { font-style: normal; color: var(--c-texte-faible); font-size: 0.8rem; }
+
+/* ── Scène ── */
+.qz__stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 940px;
+  text-align: center;
+}
+.qz__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-or);
+  margin-bottom: 1.2rem;
+}
+
+/* ── Intro ── */
+.qz__intro-titre {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.03;
+  color: var(--c-texte);
+}
+.qz__intro-sous {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-h3);
+  color: var(--c-texte-doux);
+  margin: 1.2rem auto 2.4rem;
+  max-width: 40ch;
+}
+.qz__start {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.05rem 2.3rem;
+  border-radius: 999px;
+  background: var(--c-accent);
+  color: var(--c-fond);
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 14px 44px -14px rgba(47, 182, 196, 0.75);
+  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft);
+}
+.qz__start:hover { transform: translateY(-3px); box-shadow: 0 20px 54px -14px rgba(47, 182, 196, 0.9); }
+.qz__start svg { transition: transform 0.4s var(--ease-soft); }
+.qz__start:hover svg { transform: translateX(4px); }
+.qz__duree {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--c-texte-faible);
+}
+
+/* ── Question ── */
+.qz__q-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+}
+.qz__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--c-texte-doux);
+  padding: 0.5rem 0.2rem;
+  transition: color 0.3s;
+}
+.qz__back:hover { color: var(--c-accent); }
+.qz__step {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-texte-faible);
+}
+.qz__q-titre {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 4.6vw, 3rem);
+  line-height: 1.06;
+  color: var(--c-texte);
+  max-width: 20ch;
+  margin: 0 auto;
+}
+.qz__multi-hint {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+/* Cartes */
+.qz__cards {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.3rem);
+  margin: clamp(1.8rem, 4vw, 2.8rem) 0 clamp(1.4rem, 3vw, 2rem);
+}
+.qz__cards--multi { grid-template-columns: repeat(3, 1fr); }
+
+.qz__card {
+  position: relative;
+  width: 100%;
+  min-height: 128px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  border-radius: var(--radius);
+  background: var(--c-verre);
+  border: 1px solid var(--c-ligne);
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-soft), border-color 0.4s, box-shadow 0.4s, background 0.4s;
+}
+.qz__card:hover,
+.qz__card:focus-visible {
+  transform: translateY(-6px);
+  border-color: rgba(47, 182, 196, 0.5);
+  box-shadow: 0 24px 54px -26px rgba(0, 0, 0, 0.8);
+  outline: none;
+}
+.qz__card.is-selected {
+  border-color: var(--c-accent);
+  background: linear-gradient(160deg, rgba(47, 182, 196, 0.16), rgba(47, 182, 196, 0.05));
+}
+.qz__card-icon {
+  color: var(--c-accent);
+  width: 34px;
+  height: 34px;
+}
+.qz__card-icon svg { width: 100%; height: 100%; }
+.qz__card-label {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.15;
+  color: var(--c-texte);
+}
+.qz__card-detail {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--c-texte-doux);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s var(--ease-soft), opacity 0.35s;
+}
+.qz__card:hover .qz__card-detail,
+.qz__card:focus-visible .qz__card-detail,
+.qz__card.is-selected .qz__card-detail {
+  max-height: 4em;
+  opacity: 1;
+}
+.qz__card-check {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--c-fond);
+  background: var(--c-accent);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.3s, transform 0.3s var(--ease-soft);
+}
+.qz__card.is-selected .qz__card-check { opacity: 1; transform: scale(1); }
+
+/* Pied de question */
+.qz__q-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.qz__skip {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--c-texte-faible);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.3s;
+}
+.qz__skip:hover { color: var(--c-texte-doux); }
+.qz__next { min-width: 160px; }
+.qz__next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Récap ── */
+.qz__recap-titre {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: var(--c-texte);
+}
+.qz__recap-sous {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--c-texte-doux);
+  font-size: var(--fs-h3);
+  margin: 1rem auto 2.4rem;
+  max-width: 44ch;
+}
+.qz__recap-list {
+  max-width: 620px;
+  margin: 0 auto 2.4rem;
+  text-align: left;
+  background: var(--c-verre);
+  border: 1px solid var(--c-ligne);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+.qz__recap-list h3 {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-or);
+  margin-bottom: 1rem;
+}
+.qz__recap-list dl { display: flex; flex-direction: column; gap: 0.8rem; }
+.qz__recap-list dt { font-size: 0.8rem; color: var(--c-texte-faible); }
+.qz__recap-list dd {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--c-texte);
+  margin: 0.1rem 0 0;
+}
+.qz__restart {
+  display: inline-flex;
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-ligne);
+  color: var(--c-texte);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-soft);
+}
+.qz__restart:hover { border-color: var(--c-accent); transform: translateY(-2px); }
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .qz__cards, .qz__cards--multi { grid-template-columns: 1fr; }
+  .qz__card { min-height: 0; flex-direction: row; align-items: center; gap: 0.9rem; }
+  .qz__card-icon { flex: none; }
+  .qz__card-label { flex: 1; }
+  .qz__card-detail { display: none; } /* pas de survol sur tactile : on garde compact */
+  /* Jauge : fine barre horizontale en haut plutôt que tube latéral */
+  .qz__gauge {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: clamp(1rem, 4vh, 2rem);
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .qz__gauge-tube {
+    width: min(60vw, 220px);
+    height: 6px;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .qz__gauge-fill {
+    height: 100%;
+    width: var(--p, 6%);
+    background: linear-gradient(to right, var(--c-accent-2, #1a7a9e), var(--c-accent));
+    transition: width 0.7s var(--ease-water, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  .qz__gauge-wave { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qz__gauge-wave, .qz__gauge-fill { animation: none; transition: none; }
+  .qz__card { transition: border-color 0.2s, background 0.2s; }
+}

@@ -5,6 +5,7 @@ export default {
     realisations: "Portfolio",
     histoire: "Our Story",
     nosPiscines: "Our Pools",
+    quelBassin: "Which pool?",
     rendezVous: "Appointment",
     avis: "Reviews",
     processus: "The Process",
@@ -12,6 +13,81 @@ export default {
     menu: "Menu",
     fermer: "Close",
     langue: "Language",
+  },
+
+  quizPage: {
+    eyebrow: "The quiz",
+    titre: "Which pool is right for you?",
+    sousTitre: "Five questions. One tailored recommendation.",
+    commencer: "Start",
+    dureeIndice: "2 minutes, no more",
+    question: "Question",
+    sur: "of",
+    retour: "Back",
+    suivant: "Next",
+    passer: "Skip this step",
+    multiIndice: "Several choices allowed",
+    recapTitre: "Got it.",
+    recapSousTitre: "Your personalised recommendation comes in the next step.",
+    recapRappel: "Your answers",
+    refaire: "Retake the quiz",
+    questions: {
+      usage: {
+        titre: "Your pool will mostly be for…",
+        options: {
+          detente: { label: "Relaxing with family", detail: "Gentle swims and shared moments, safely." },
+          sport: { label: "Swimming and sport", detail: "Serious lengths, every morning." },
+          recevoir: { label: "Entertaining all summer", detail: "Drinks by the water, big gatherings." },
+          vue: { label: "Framing the view", detail: "Making the horizon the heart of the scene." },
+        },
+      },
+      terrain: {
+        titre: "What is your plot like?",
+        options: {
+          plat: { label: "Flat and open", detail: "Ideal ground: almost anything is possible." },
+          pente: { label: "Sloped or terraced", detail: "A slope to exploit, not to fight." },
+          petit: { label: "Small space", detail: "Every metre counts." },
+          vuevalu: { label: "With a view to showcase", detail: "Sea, hills or garden to frame." },
+        },
+      },
+      espace: {
+        titre: "How much space do you have?",
+        options: {
+          petit30: { label: "Under 30 m²", detail: "Compact, urban, clever." },
+          moyen: { label: "30 to 60 m²", detail: "The most common footprint." },
+          grand: { label: "Over 60 m²", detail: "Room to think big." },
+          inconnu: { label: "I don't know yet", detail: "We'll estimate together, on site." },
+        },
+      },
+      priorite: {
+        titre: "What matters most to you?",
+        options: {
+          esthetique: { label: "Aesthetics", detail: "Beauty above all." },
+          entretien: { label: "Easy upkeep", detail: "Enjoy it, without a thought." },
+          budget: { label: "A controlled budget", detail: "A fine project, well framed." },
+          durabilite: { label: "Durability", detail: "Built to last decades." },
+        },
+      },
+      delai: {
+        titre: "When are you picturing this?",
+        options: {
+          asap: { label: "As soon as possible", detail: "The desire is here, now." },
+          mois: { label: "In the coming months", detail: "Time to prepare it well." },
+          saison: { label: "Next season", detail: "Ready for next summer." },
+          renseigne: { label: "Just exploring", detail: "Still at the idea stage." },
+        },
+      },
+      envies: {
+        titre: "Anything special in mind?",
+        options: {
+          eclairage: { label: "Lighting", detail: "Nights that light up." },
+          spa: { label: "Spa", detail: "A wellness corner, jets and warmth." },
+          volet: { label: "Automatic cover", detail: "Safety and cleaner water." },
+          chauffage: { label: "Heating", detail: "A longer swimming season." },
+          nage: { label: "Counter-current", detail: "Swim on the spot, endlessly." },
+        },
+      },
+    },
   },
 
   pages: {

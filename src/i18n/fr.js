@@ -5,6 +5,7 @@ export default {
     realisations: "Réalisations",
     histoire: "Notre histoire",
     nosPiscines: "Nos piscines",
+    quelBassin: "Quel bassin ?",
     rendezVous: "Rendez-vous",
     avis: "Avis clients",
     processus: "Le processus",
@@ -12,6 +13,81 @@ export default {
     menu: "Menu",
     fermer: "Fermer",
     langue: "Langue",
+  },
+
+  quizPage: {
+    eyebrow: "Le quiz",
+    titre: "Quel bassin est fait pour vous ?",
+    sousTitre: "Cinq questions. Une recommandation sur mesure.",
+    commencer: "Commencer",
+    dureeIndice: "2 minutes, pas plus",
+    question: "Question",
+    sur: "sur",
+    retour: "Retour",
+    suivant: "Suivant",
+    passer: "Passer cette étape",
+    multiIndice: "Plusieurs choix possibles",
+    recapTitre: "C'est noté.",
+    recapSousTitre: "Votre recommandation personnalisée arrive à la prochaine étape.",
+    recapRappel: "Vos réponses",
+    refaire: "Refaire le quiz",
+    questions: {
+      usage: {
+        titre: "Votre piscine, ce sera surtout pour…",
+        options: {
+          detente: { label: "Se détendre en famille", detail: "Baignades douces et moments partagés, en toute sécurité." },
+          sport: { label: "Nager et faire du sport", detail: "Des longueurs sérieuses, chaque matin." },
+          recevoir: { label: "Recevoir et profiter de l'été", detail: "Apéritifs au bord de l'eau, grandes tablées." },
+          vue: { label: "Sublimer la vue", detail: "Faire de l'horizon le cœur du décor." },
+        },
+      },
+      terrain: {
+        titre: "Votre terrain, il ressemble à quoi ?",
+        options: {
+          plat: { label: "Plat et dégagé", detail: "Terrain idéal : presque tout est possible." },
+          pente: { label: "En pente ou en restanque", detail: "Un dénivelé à exploiter, pas à subir." },
+          petit: { label: "Petit espace", detail: "Chaque mètre compte." },
+          vuevalu: { label: "Avec une vue à mettre en valeur", detail: "Mer, collines ou jardin à cadrer." },
+        },
+      },
+      espace: {
+        titre: "L'espace dont vous disposez ?",
+        options: {
+          petit30: { label: "Moins de 30 m²", detail: "Compact, urbain, malin." },
+          moyen: { label: "30 à 60 m²", detail: "La surface la plus courante." },
+          grand: { label: "Plus de 60 m²", detail: "De l'ampleur pour voir grand." },
+          inconnu: { label: "Je ne sais pas encore", detail: "On estimera ensemble, sur place." },
+        },
+      },
+      priorite: {
+        titre: "Ce qui compte le plus pour vous ?",
+        options: {
+          esthetique: { label: "L'esthétique", detail: "La beauté avant tout." },
+          entretien: { label: "La facilité d'entretien", detail: "Profiter, sans y penser." },
+          budget: { label: "Le budget maîtrisé", detail: "Un beau projet, bien cadré." },
+          durabilite: { label: "La durabilité", detail: "Construire pour des décennies." },
+        },
+      },
+      delai: {
+        titre: "Vous vous projetez quand ?",
+        options: {
+          asap: { label: "Dès que possible", detail: "L'envie est là, maintenant." },
+          mois: { label: "Dans les prochains mois", detail: "Le temps de bien préparer." },
+          saison: { label: "La saison prochaine", detail: "Prêt pour l'été prochain." },
+          renseigne: { label: "Je me renseigne", detail: "Encore au stade des idées." },
+        },
+      },
+      envies: {
+        titre: "Une envie particulière ?",
+        options: {
+          eclairage: { label: "Éclairage", detail: "Des nuits qui s'illuminent." },
+          spa: { label: "Spa", detail: "Un coin bien-être, jets et chaleur." },
+          volet: { label: "Volet automatique", detail: "Sécurité et eau plus propre." },
+          chauffage: { label: "Chauffage", detail: "La saison de baignade rallongée." },
+          nage: { label: "Nage à contre-courant", detail: "Nager sur place, sans fin." },
+        },
+      },
+    },
   },
 
   pages: {

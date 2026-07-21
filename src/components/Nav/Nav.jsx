@@ -12,6 +12,7 @@ const LIENS = [
   { key: "accueil", to: "/", img: "/media/realisations/villa-eze.jpg" },
   { key: "histoire", to: "/notre-histoire", img: "/media/histoire/artisan.jpg" },
   { key: "nosPiscines", to: "/nos-piscines", img: "/media/realisations/saint-tropez.jpg" },
+  { key: "quelBassin", to: "/quel-bassin", img: "/media/realisations/mougins.jpg" },
   { key: "rendezVous", to: "/rendez-vous", img: "/media/realisations/cap-ferrat.jpg" },
 ];
 

@@ -7,6 +7,7 @@ import Footer from "./sections/Footer/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import NotreHistoire from "./pages/NotreHistoire.jsx";
 import NosPiscines from "./pages/NosPiscines.jsx";
+import QuelBassin from "./pages/QuelBassin.jsx";
 import RendezVous from "./pages/RendezVous.jsx";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/notre-histoire" element={<NotreHistoire />} />
           <Route path="/nos-piscines" element={<NosPiscines />} />
+          <Route path="/quel-bassin" element={<QuelBassin />} />
           <Route path="/rendez-vous" element={<RendezVous />} />
           <Route path="*" element={<Home />} />
         </Routes>
