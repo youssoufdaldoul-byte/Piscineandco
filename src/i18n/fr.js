@@ -31,6 +31,16 @@ export default {
     recapSousTitre: "Votre recommandation personnalisée arrive à la prochaine étape.",
     recapRappel: "Vos réponses",
     refaire: "Refaire le quiz",
+    votreBassin: "Votre bassin",
+    voirAussi: "Voir aussi",
+    bassins: {
+      debordement: { nom: "Piscine à débordement" },
+      couloir: { nom: "Couloir de nage" },
+      rectangle: { nom: "Piscine rectangulaire classique" },
+      formelibre: { nom: "Piscine forme libre" },
+      mini: { nom: "Mini-piscine urbaine" },
+      plage: { nom: "Piscine avec plage immergée" },
+    },
     questions: {
       usage: {
         titre: "Votre piscine, ce sera surtout pour…",

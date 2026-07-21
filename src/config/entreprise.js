@@ -239,6 +239,54 @@ export const entreprise = {
       { id: "delai", options: ["asap", "mois", "saison", "renseigne"] },
       { id: "envies", multi: true, options: ["eclairage", "spa", "volet", "chauffage", "nage"] },
     ],
+
+    // Types de bassin recommandables
+    bassins: ["debordement", "couloir", "rectangle", "formelibre", "mini", "plage"],
+
+    // Ordre de préférence en cas d'égalité (et repli si tout est à 0)
+    tieBreak: ["rectangle", "debordement", "plage", "couloir", "formelibre", "mini"],
+
+    // Scoring pondéré : question → option → { type de bassin: points }.
+    // Ajustable ici sans toucher au code. Chaque type reste atteignable.
+    scores: {
+      usage: {
+        detente: { plage: 3, rectangle: 2, formelibre: 1 },
+        sport: { couloir: 5 },
+        recevoir: { formelibre: 3, plage: 2, rectangle: 1 },
+        vue: { debordement: 5 },
+      },
+      terrain: {
+        plat: { rectangle: 2, plage: 2, couloir: 1, formelibre: 1 },
+        pente: { debordement: 5, couloir: 1 },
+        petit: { mini: 5, couloir: 2 },
+        vuevalu: { debordement: 4, formelibre: 2 },
+      },
+      espace: {
+        petit30: { mini: 5, couloir: 1 },
+        moyen: { rectangle: 2, couloir: 2, formelibre: 1 },
+        grand: { plage: 3, debordement: 2, formelibre: 2, couloir: 1 },
+        inconnu: {},
+      },
+      priorite: {
+        esthetique: { formelibre: 3, debordement: 2, plage: 1 },
+        entretien: { rectangle: 2, mini: 2, couloir: 1 },
+        budget: { mini: 3, rectangle: 2 },
+        durabilite: { rectangle: 2, debordement: 1, couloir: 1 },
+      },
+      delai: {
+        asap: { mini: 1, rectangle: 1 },
+        mois: {},
+        saison: {},
+        renseigne: {},
+      },
+      envies: {
+        eclairage: { formelibre: 1, plage: 1 },
+        spa: { plage: 1, formelibre: 1 },
+        volet: { rectangle: 1, couloir: 1 },
+        chauffage: { rectangle: 1 },
+        nage: { couloir: 4 },
+      },
+    },
   },
 
   medias: {

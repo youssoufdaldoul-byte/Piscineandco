@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "../lib/gsap.js";
 import { useLangue } from "../i18n/index.jsx";
 import { entreprise } from "../config/entreprise.js";
+import { recommander } from "../lib/quizScore.js";
 import "./quel-bassin.css";
 
 /* ── Icônes de carte (traits fins, currentColor) ── */
@@ -201,6 +202,21 @@ export default function QuelBassin() {
             <p className="qz__eyebrow">{t("quizPage.eyebrow")}</p>
             <h2 className="qz__recap-titre">{t("quizPage.recapTitre")}</h2>
             <p className="qz__recap-sous">{t("quizPage.recapSousTitre")}</p>
+
+            {/* Recommandation calculée (rendu provisoire — Phase 3 cinématique) */}
+            {(() => {
+              const reco = recommander(answers, entreprise.quiz);
+              return (
+                <div className="qz__reco">
+                  <p className="qz__reco-label">{t("quizPage.votreBassin")}</p>
+                  <p className="qz__reco-nom">{t(`quizPage.bassins.${reco.winner}.nom`)}</p>
+                  <p className="qz__reco-aussi">
+                    {t("quizPage.voirAussi")} · {t(`quizPage.bassins.${reco.runnerUp}.nom`)}
+                  </p>
+                </div>
+              );
+            })()}
+
             <div className="qz__recap-list">
               <h3>{t("quizPage.recapRappel")}</h3>
               <dl>

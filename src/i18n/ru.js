@@ -31,6 +31,16 @@ export default {
     recapSousTitre: "Ваша персональная рекомендация появится на следующем шаге.",
     recapRappel: "Ваши ответы",
     refaire: "Пройти тест заново",
+    votreBassin: "Ваш бассейн",
+    voirAussi: "Смотрите также",
+    bassins: {
+      debordement: { nom: "Инфинити-бассейн" },
+      couloir: { nom: "Дорожка для плавания" },
+      rectangle: { nom: "Классический прямоугольный бассейн" },
+      formelibre: { nom: "Бассейн свободной формы" },
+      mini: { nom: "Городской мини-бассейн" },
+      plage: { nom: "Бассейн с пляжным входом" },
+    },
     questions: {
       usage: {
         titre: "Ваш бассейн будет в основном для…",

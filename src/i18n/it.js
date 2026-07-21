@@ -31,6 +31,16 @@ export default {
     recapSousTitre: "La tua raccomandazione personalizzata arriva al passo successivo.",
     recapRappel: "Le tue risposte",
     refaire: "Rifai il quiz",
+    votreBassin: "La tua piscina",
+    voirAussi: "Vedi anche",
+    bassins: {
+      debordement: { nom: "Piscina a sfioro" },
+      couloir: { nom: "Corsia da nuoto" },
+      rectangle: { nom: "Piscina rettangolare classica" },
+      formelibre: { nom: "Piscina a forma libera" },
+      mini: { nom: "Mini-piscina urbana" },
+      plage: { nom: "Piscina con spiaggia immersa" },
+    },
     questions: {
       usage: {
         titre: "La tua piscina sarà soprattutto per…",

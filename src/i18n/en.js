@@ -31,6 +31,16 @@ export default {
     recapSousTitre: "Your personalised recommendation comes in the next step.",
     recapRappel: "Your answers",
     refaire: "Retake the quiz",
+    votreBassin: "Your pool",
+    voirAussi: "See also",
+    bassins: {
+      debordement: { nom: "Infinity pool" },
+      couloir: { nom: "Swim lane" },
+      rectangle: { nom: "Classic rectangular pool" },
+      formelibre: { nom: "Free-form pool" },
+      mini: { nom: "Urban mini-pool" },
+      plage: { nom: "Beach-entry pool" },
+    },
     questions: {
       usage: {
         titre: "Your pool will mostly be for…",
