@@ -4,11 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import { LangueProvider } from "./i18n/index.jsx";
 import { applyTheme } from "./config/applyTheme.js";
+import { applyProspect } from "./config/whiteLabel.js";
 import "./styles/theme.css";
 import "./styles/global.css";
 
 // Applique les couleurs de marque depuis la config centrale
 applyTheme();
+// White-label : surcharge le nom/ville/téléphone selon ?client=<slug>
+applyProspect();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

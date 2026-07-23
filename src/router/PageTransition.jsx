@@ -5,6 +5,14 @@ import "./PageTransition.css";
 
 const Ctx = createContext(null);
 
+/** Conserve le paramètre white-label ?client=<slug> sur une destination interne. */
+function withClient(to) {
+  if (typeof window === "undefined") return to;
+  const client = new URLSearchParams(window.location.search).get("client");
+  if (!client || to.includes("client=")) return to;
+  return to + (to.includes("?") ? "&" : "?") + "client=" + encodeURIComponent(client);
+}
+
 /**
  * Transition de page cinématique : un bloom lumineux turquoise/blanc envahit
  * l'écran (avec une vague liquide), la route bascule au pic (masqué), puis le
@@ -27,11 +35,13 @@ export function PageTransitionProvider({ children }) {
   const navigateTo = useCallback(
     (to) => {
       if (to === location.pathname) return;
+      // White-label : on conserve ?client=<slug> à travers la navigation interne
+      const dest = withClient(to);
       const overlay = overlayRef.current;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (!overlay || reduce || animating.current) {
-        navigate(to);
+        navigate(dest);
         resetScroll();
         requestAnimationFrame(() => ScrollTrigger.refresh());
         return;
@@ -53,7 +63,7 @@ export function PageTransitionProvider({ children }) {
         .to(waveRef.current, { yPercent: 0, duration: 0.45, ease: "power3.inOut" }, 0)
         // 2) Bascule de route au pic (masquée)
         .add(() => {
-          navigate(to);
+          navigate(dest);
           resetScroll();
           ScrollTrigger.refresh();
         }, 0.45)
