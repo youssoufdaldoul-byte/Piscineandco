@@ -19,11 +19,12 @@ function resoudre(objet, chemin) {
 export function LangueProvider({ children }) {
   const [langue, setLangueState] = useState(() => {
     if (typeof window === "undefined") return langueParDefaut;
+    // Seule une langue explicitement choisie (via le sélecteur) est mémorisée.
+    // Sinon on force le français : la clientèle cible est francophone, on ne
+    // laisse PAS le navigateur imposer l'anglais. Le sélecteur reste dispo.
     const sauvegardee = window.localStorage.getItem(STORAGE_KEY);
     if (sauvegardee && dictionnaires[sauvegardee]) return sauvegardee;
-    // Détection depuis le navigateur
-    const nav = (window.navigator.language || "fr").slice(0, 2).toLowerCase();
-    return dictionnaires[nav] ? nav : langueParDefaut;
+    return langueParDefaut;
   });
 
   const setLangue = useCallback((code) => {
