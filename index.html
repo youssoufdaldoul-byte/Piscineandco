@@ -20,6 +20,17 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!-- CDN médias (Higgsfield/CloudFront) : connexion établie tôt, avant que
+         React ne découvre les URLs — évite le coût DNS+TLS au moment du hero. -->
+    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
+    <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin />
+    <!-- Hero poster = LCP : préchargé en haute priorité, jamais lazy-loadé. -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://d8j0ntlcm91z4.cloudfront.net/user_3FzneIW6DeCzXNNc7KNNfmQuLKf/hf_20260719_114556_4148fe98-27d4-4df5-8ce6-2686f1084712_min.webp"
+    />
   </head>
   <body>
     <div id="root"></div>

@@ -11,17 +11,27 @@
  *       correspondant (la clé de gauche, ex. public/media/hero/hero.mp4).
  *    2. Videz l'objet `mediaRemote` (mettez-le à {}) — le site utilisera alors
  *       automatiquement les fichiers locaux.
+ *
+ *  ▶ PERF (audit du 2026-07-28) : les images ci-dessous marquées "optimisées"
+ *    ont été redimensionnées à leur taille d'affichage réelle et recompressées
+ *    en WebP q78-82 (voir mediaRemoteSmall pour les variantes mobiles). La
+ *    vidéo hero-scrub a été ré-encodée keyframe-sur-chaque-frame (-g 1),
+ *    sans audio. Détails complets dans le rapport de perf fourni au client.
  * ============================================================================
  */
 
 const CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_3FzneIW6DeCzXNNc7KNNfmQuLKf";
+// Bucket des médias ré-encodés / recompressés lors de l'audit perf.
+const CDN_OPT = "https://d2ol7oe51mr4n9.cloudfront.net/user_3FzneIW6DeCzXNNc7KNNfmQuLKf";
 
 export const mediaRemote = {
-  // Vidéo hero (mp4 pleine qualité)
+  // Vidéo hero (mp4 pleine qualité) — non utilisée par le hero actif (HeroScrub
+  // utilise `medias.heroScrub`), conservée pour compat / usage futur.
   "/media/hero/hero.mp4": `${CDN}/hf_20260717_234454_3cb55dfa-f660-4312-ad96-e69f9deb3275.mp4`,
   "/media/hero/hero-poster.jpg": `${CDN}/hf_20260717_234531_dd44277f-38e1-46f1-af52-06b00476a2fb_min.webp`,
 
-  // Hero — séquence de construction (même cadrage, time-lapse)
+  // Hero — séquence de construction (même cadrage, time-lapse) — utilisée par
+  // le composant Hero.jsx (variante non active sur la page d'accueil actuelle).
   "/media/hero-construction/etape-1.jpg": `${CDN}/hf_20260719_114556_4148fe98-27d4-4df5-8ce6-2686f1084712_min.webp`,
   "/media/hero-construction/etape-2.jpg": `${CDN}/hf_20260719_114733_787f7c68-8db3-4958-b733-ba563fae99b4_min.webp`,
   "/media/hero-construction/etape-3.jpg": `${CDN}/hf_20260719_114737_b4497187-b2c3-4ccc-97c7-dec3f0436d6c_min.webp`,
@@ -34,12 +44,14 @@ export const mediaRemote = {
   "/media/hero-construction/workers.png": `${CDN}/hf_20260719_140233_8fa25988-95a3-46cd-a216-e6519d2a504c.png`,
   "/media/hero-construction/digging.mp4": `${CDN}/hf_20260719_135943_f68e07c8-11a5-4e9f-bb0e-903503542f6e.mp4`,
 
-  // Hero scrubbé au scroll — time-lapse complet (1080p, upscalé).
-  // ⚠️ Clip généré NON ré-encodé keyframe/frame : scrub potentiellement un peu
-  // saccadé. Pour une fluidité parfaite, remplacer par les fichiers ré-encodés
-  // locaux (public/media/hero-scrub/) et retirer ces 2 lignes.
-  "/media/hero-scrub/hero-1920.mp4": `${CDN}/hf_20260719_232014_457c2481-cc80-445a-882e-9f04822b8c99.mp4`,
-  "/media/hero-scrub/hero-1280.mp4": `${CDN}/hf_20260719_232014_457c2481-cc80-445a-882e-9f04822b8c99.mp4`,
+  // Hero scrubbé au scroll (celui réellement affiché sur "/") — ré-encodé
+  // keyframe-sur-chaque-frame (-g 1) pour un scrub fluide : chaque seek tombe
+  // pile sur une image-clé, aucun décodage en chaîne. Audio retiré (muet).
+  // 1920 (desktop) / 960 (mobile) sont maintenant deux fichiers RÉELLEMENT
+  // distincts (avant l'audit, les deux pointaient vers le même master 13 Mo).
+  //   original 13.0 Mo  →  1920: 4.0 Mo (-69 %)  /  960: 1.8 Mo (-86 %)
+  "/media/hero-scrub/hero-1920.mp4": `${CDN_OPT}/fada278a-e29c-40b2-a94e-aa868b3342af.mp4`,
+  "/media/hero-scrub/hero-1280.mp4": `${CDN_OPT}/0b910d1d-e737-42f2-8bd7-f4bd30dd8257.mp4`,
   "/media/hero-scrub/hero-poster.jpg": `${CDN}/hf_20260719_114556_4148fe98-27d4-4df5-8ce6-2686f1084712_min.webp`,
 
   // Catalogue — images "avant" (même cadrage que le modèle "après")
@@ -53,35 +65,65 @@ export const mediaRemote = {
   // Artisan
   "/media/histoire/artisan.jpg": `${CDN}/hf_20260717_235530_931725db-8274-4bcd-83b5-bdc8e4cf1802_min.webp`,
 
-  // Services
-  "/media/services/sur-mesure.jpg": `${CDN}/hf_20260717_234622_5977f82d-98b1-4c87-84ff-79bc70076b35_min.webp`,
-  "/media/services/debordement.jpg": `${CDN}/hf_20260717_235137_bb2c55b9-a8d5-4e88-86e3-fa34b3a78f74_min.webp`,
-  "/media/services/renovation.jpg": `${CDN}/hf_20260717_235141_e587950f-efa9-42eb-b206-b088ae233505_min.webp`,
-  "/media/services/entretien.jpg": `${CDN}/hf_20260717_234629_cdf8e06f-bfae-451e-88fb-70aa85dea2db_min.webp`,
-  "/media/services/spa.jpg": `${CDN}/hf_20260717_235527_c7a3fd4a-312f-4c0e-95c2-19f0978641c9_min.webp`,
+  // Services — optimisées (voir mediaRemoteSmall pour la variante mobile)
+  "/media/services/sur-mesure.jpg": `${CDN_OPT}/301f1b50-9e18-4983-bcad-10b4cf6ca834.webp`,
+  "/media/services/debordement.jpg": `${CDN_OPT}/49527f7d-b0d2-4082-9540-f2cc53786c57.webp`,
+  "/media/services/renovation.jpg": `${CDN_OPT}/6847d33c-1679-4beb-9c5c-63b7d932f417.webp`,
+  "/media/services/entretien.jpg": `${CDN_OPT}/22a4116c-eb20-4c31-93e2-f317086d78af.webp`,
+  "/media/services/spa.jpg": `${CDN_OPT}/0054787c-9ea3-40f9-8f08-f39ddf9375d7.webp`,
 
-  // Réalisations
-  "/media/realisations/villa-eze.jpg": `${CDN}/hf_20260717_235255_3dd4be1c-2904-460b-b3fa-df076fd8963d_min.webp`,
-  "/media/realisations/cap-ferrat.jpg": `${CDN}/hf_20260717_235257_d9b2c96a-ac90-4d30-9717-8cc82bb04dbb_min.webp`,
-  "/media/realisations/cannes-nuit.jpg": `${CDN}/hf_20260717_235301_d5ecfeb3-3548-4468-a31e-146b223e08f4_min.webp`,
-  "/media/realisations/mougins.jpg": `${CDN}/hf_20260717_235304_b3ed4816-12cd-4abe-9b3a-571e30176e45_min.webp`,
-  "/media/realisations/antibes.jpg": `${CDN}/hf_20260717_235414_19d21c97-e57e-482c-87b9-8388ff9b7428_min.webp`,
-  "/media/realisations/saint-tropez.jpg": `${CDN}/hf_20260717_235417_7483c77e-cc15-4728-b67f-b71bc7bc326b_min.webp`,
-  "/media/realisations/monaco.jpg": `${CDN}/hf_20260717_235420_12110b65-3491-4209-8972-4db35bb61bfb_min.webp`,
-  "/media/realisations/menton.jpg": `${CDN}/hf_20260717_235425_fa284b56-71c1-446d-a202-41e2cf21321b_min.webp`,
+  // Réalisations — optimisées (voir mediaRemoteSmall pour la variante mobile)
+  "/media/realisations/villa-eze.jpg": `${CDN_OPT}/516414ff-035e-4f5d-be36-e808c9929262.webp`,
+  "/media/realisations/cap-ferrat.jpg": `${CDN_OPT}/d57a25d6-daa7-49ed-be5d-93c2691389a6.webp`,
+  "/media/realisations/cannes-nuit.jpg": `${CDN_OPT}/030ee4bd-6880-4042-ad86-4ee7721c4a11.webp`,
+  "/media/realisations/mougins.jpg": `${CDN_OPT}/a727ca48-ad0e-4453-9d11-df72fa7abb84.webp`,
+  "/media/realisations/antibes.jpg": `${CDN_OPT}/4a49f457-edc4-4bbc-86f2-64163c82ffc0.webp`,
+  "/media/realisations/saint-tropez.jpg": `${CDN_OPT}/587d133e-2a6d-4369-bb0b-dba292f0c5ee.webp`,
+  "/media/realisations/monaco.jpg": `${CDN_OPT}/9894b50d-9b8c-4c15-8a88-d8bd7c3d979c.webp`,
+  "/media/realisations/menton.jpg": `${CDN_OPT}/53c45f4c-492e-4102-9763-1744c5c8a240.webp`,
 
-  // Avis (miniatures)
-  "/media/avis/avis-1.jpg": `${CDN}/hf_20260717_234554_c3a5e151-47d0-4954-8dbe-d565d9e1a5fd_min.webp`,
-  "/media/avis/avis-2.jpg": `${CDN}/hf_20260717_234557_7ac06a42-307c-4b14-8482-c4b38eef89a3_min.webp`,
-  "/media/avis/avis-3.jpg": `${CDN}/hf_20260717_234600_7e085ed3-30d8-40a4-be5b-9c4f6d7e49c2_min.webp`,
-  "/media/avis/avis-4.jpg": `${CDN}/hf_20260717_235131_8cc561c3-a65f-4fd4-b2b6-de66e8a8e31b_min.webp`,
-  "/media/avis/avis-5.jpg": `${CDN}/hf_20260717_235134_b65dcc7c-994c-450c-8c77-78421b3adfdd_min.webp`,
+  // Avis (miniatures) — recadrées à leur taille réelle d'affichage (42×42 css,
+  // export 200×200 pour le rétina) : 2048×2048 → 200×200, ~234 Ko → ~5-7 Ko.
+  "/media/avis/avis-1.jpg": `${CDN_OPT}/3f6c5f28-10df-4208-99ef-470e6ff529ef.webp`,
+  "/media/avis/avis-2.jpg": `${CDN_OPT}/b6189710-565a-4e1a-8e3f-8439e8ccc5d0.webp`,
+  "/media/avis/avis-3.jpg": `${CDN_OPT}/87fe0620-5905-4a5f-a383-6171dce90e0c.webp`,
+  "/media/avis/avis-4.jpg": `${CDN_OPT}/19b649bf-bbc4-4c75-9c50-ea88f3b0fae1.webp`,
+  "/media/avis/avis-5.jpg": `${CDN_OPT}/f6c69780-daa2-45e5-bbd8-c310ae411950.webp`,
+};
+
+/**
+ * Variantes "petit écran" (≈800px de large max) des images ci-dessus, pour le
+ * srcset responsive de <MediaImage>. Seules les images du dessus-de-page /
+ * grilles homepage (services, réalisations) ont une variante ; les chemins
+ * absents ici n'ont simplement pas de srcset (fallback sur mediaRemote seul).
+ */
+export const mediaRemoteSmall = {
+  "/media/services/sur-mesure.jpg": `${CDN_OPT}/d1eac19a-06fc-4a99-9092-bd45852148f8.webp`,
+  "/media/services/debordement.jpg": `${CDN_OPT}/31a7a906-d170-460d-a9d7-861716f4d451.webp`,
+  "/media/services/renovation.jpg": `${CDN_OPT}/ddb61ab3-3e02-45bd-a807-938f6aeeaa79.webp`,
+  "/media/services/entretien.jpg": `${CDN_OPT}/25bb9d76-1bb8-4c37-a5ba-aa337ded131e.webp`,
+  "/media/services/spa.jpg": `${CDN_OPT}/be94aa02-9e03-42b8-9622-e509c1c328fc.webp`,
+
+  "/media/realisations/villa-eze.jpg": `${CDN_OPT}/8cd35d6a-a208-4345-8734-f8f96890fe38.webp`,
+  "/media/realisations/cap-ferrat.jpg": `${CDN_OPT}/a0db808e-ab72-4b22-8741-303b0774876a.webp`,
+  "/media/realisations/cannes-nuit.jpg": `${CDN_OPT}/ebecd647-0d03-42d5-ae68-cd7bc091c5b8.webp`,
+  "/media/realisations/mougins.jpg": `${CDN_OPT}/9853ac6a-594f-480e-a3e7-6fda3062c9a6.webp`,
+  "/media/realisations/antibes.jpg": `${CDN_OPT}/52805439-515d-4df3-b5c6-4dda2e8a7321.webp`,
+  "/media/realisations/saint-tropez.jpg": `${CDN_OPT}/3a920042-92b0-4c68-be2f-1c84d94cb9ee.webp`,
+  "/media/realisations/monaco.jpg": `${CDN_OPT}/f87d5ed0-0216-469b-98c7-31cd2678bba0.webp`,
+  "/media/realisations/menton.jpg": `${CDN_OPT}/edc69c1c-c752-4533-852d-21d8a9b8d6cc.webp`,
 };
 
 /** Renvoie l'URL distante si elle existe, sinon le chemin local d'origine. */
 export function resolveMedia(path) {
   if (!path) return path;
   return mediaRemote[path] || path;
+}
+
+/** Renvoie l'URL de la variante "petit écran" (~800px), ou null si absente. */
+export function resolveMediaSmall(path) {
+  if (!path) return null;
+  return mediaRemoteSmall[path] || null;
 }
 
 export default resolveMedia;

@@ -1,6 +1,6 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "../../lib/gsap.js";
-import { resolveMedia } from "../../config/mediaRemote.js";
+import { resolveMedia, resolveMediaSmall } from "../../config/mediaRemote.js";
 import "./MediaImage.css";
 
 /**
@@ -17,6 +17,13 @@ import "./MediaImage.css";
  *   src, alt, label, sub, ratio, className, eager, showLabel
  *   effects (défaut true) : active reveal/parallax/DOF ; false = image simple
  *     (pour les petites vignettes, ex. avatars d'avis)
+ *   sizes : attribut `sizes` HTML pour le srcset responsive (n'a d'effet que
+ *     si une variante "petite" existe dans mediaRemoteSmall)
+ *
+ * Perf (audit 2026-07-28) : quand une variante ~800px existe (mediaRemoteSmall),
+ * l'image est servie en srcset (petit écran = fichier petit écran, pas le
+ * desktop redimensionné par le navigateur). `eager` ajoute aussi
+ * fetchpriority="high" et retire le lazy-load — réservé au hero / above-the-fold.
  */
 
 function gradientFor(seed = "") {
@@ -31,6 +38,15 @@ function gradientFor(seed = "") {
 }
 
 const RATIOS = { portrait: "3 / 4", paysage: "16 / 10", carre: "1 / 1", large: "16 / 9" };
+// Dimensions intrinsèques approx. par ratio (attributs width/height — évite le
+// CLS et aide le préchargeur du navigateur ; l'affichage réel reste piloté par
+// le CSS aspect-ratio du wrapper, donc une légère approximation est sans risque).
+const INTRINSIC = {
+  portrait: [1200, 1600],
+  paysage: [1600, 1000],
+  carre: [800, 800],
+  large: [1600, 900],
+};
 
 export default function MediaImage({
   src,
@@ -43,8 +59,12 @@ export default function MediaImage({
   showLabel = true,
   effects = true,
   kenburns = false,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 640px",
 }) {
   const resolvedSrc = resolveMedia(src);
+  const smallSrc = resolveMediaSmall(src);
+  const srcSet = smallSrc && smallSrc !== resolvedSrc ? `${smallSrc} 800w, ${resolvedSrc} 1600w` : undefined;
+  const [w, h] = INTRINSIC[ratio] || INTRINSIC.paysage;
   const [errored, setErrored] = useState(!resolvedSrc);
   const rootRef = useRef(null);
   const parallaxRef = useRef(null);
@@ -112,8 +132,13 @@ export default function MediaImage({
           {!errored && (
             <img
               src={resolvedSrc}
+              srcSet={srcSet}
+              sizes={srcSet ? sizes : undefined}
+              width={w}
+              height={h}
               alt={alt}
               loading={eager ? "eager" : "lazy"}
+              fetchPriority={eager ? "high" : "auto"}
               decoding="async"
               onError={() => setErrored(true)}
               className="media-img__img"

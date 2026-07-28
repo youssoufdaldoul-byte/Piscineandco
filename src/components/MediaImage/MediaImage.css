@@ -19,10 +19,16 @@
   top: -9%;
   width: 100%;
   height: 118%;
-  will-change: transform, filter;
-  /* Profondeur de champ par défaut : légèrement flou / désaturé hors du centre */
-  filter: blur(2.5px) saturate(0.9) contrast(1.02) brightness(0.97);
-  transition: filter 0.7s var(--ease-soft);
+  will-change: transform;
+  /* Profondeur de champ par défaut : légèrement flou / désaturé hors du centre.
+     Rayon réduit (perf audit 2026-07-28) : 2.5px lisait comme "image floue /
+     mal chargée" plutôt que comme un effet de profondeur de champ voulu.
+     will-change: filter retiré — la transition est ponctuelle (une fois par
+     image, au croisement du centre du viewport), pas continue : la promotion
+     de calque GPU permanente sur 15-20 images simultanées coûtait plus cher
+     en mémoire/composition qu'elle n'apportait de fluidité. */
+  filter: blur(1px) saturate(0.94) contrast(1.01) brightness(0.98);
+  transition: filter 0.5s var(--ease-soft);
 }
 /* Net quand l'image traverse la bande centrale du viewport */
 .media-img.is-focused .media-img__parallax {

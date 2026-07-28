@@ -145,6 +145,7 @@ export default function HeroScrub() {
           muted
           playsInline
           preload="auto"
+          fetchPriority="high"
           disablePictureInPicture
           disableRemotePlayback
           aria-hidden="true"

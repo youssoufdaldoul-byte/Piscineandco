@@ -13,9 +13,12 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
-        // Sépare les grosses libs pour un meilleur cache mobile
+        // Sépare les grosses libs pour un meilleur cache mobile.
+        // NB: "three" retiré du 2026-07-28 — WaterCanvas.jsx/Underwater.jsx
+        // (seuls consommateurs de la lib) ne sont importés par aucune route
+        // active ; three.js est déjà tree-shaké à 0 octet par Rollup, mais le
+        // chunk manuel forçait quand même un fichier + une requête HTTP vides.
         manualChunks: {
-          three: ["three"],
           gsap: ["gsap"],
         },
       },
