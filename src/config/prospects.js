@@ -15,6 +15,11 @@ export const prospects = {
   "belledonne":       { nom: "Belledonne Piscine", ville: "",       telephone: "" },
   "stp-piscine":      { nom: "STP Piscine et Spa", ville: "",       telephone: "" },
   "solution-piscine": { nom: "Solution Piscine", ville: "",         telephone: "" },
+  "cote-creation":    { nom: "Côté Création Piscine", ville: "",    telephone: "" },
+  "cpa":              { nom: "CPA Création Piscines & Aménagements", ville: "", telephone: "" },
+  "mendez":           { nom: "Piscines Mendez",  ville: "",         telephone: "" },
+  "azzura":           { nom: "Piscine Azzura",   ville: "",         telephone: "" },
+  "snpc":             { nom: "Snpc",             ville: "",         telephone: "" },
 };
 
 export default prospects;
