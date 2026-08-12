@@ -32,3 +32,9 @@ pnpm-debug.log*
 .env.local
 .env.*.local
 .vercel
+
+# Video analysis pipeline — dossier de travail temporaire/isolé (jamais commité)
+.video-analysis-tmp/
+tools/video-analysis/__pycache__/
+__pycache__/
+*.pyc
